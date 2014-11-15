@@ -106,7 +106,7 @@ public class StdDisplayManager implements Display{
         int i,ch,flag=0;
         String choice="y";
         CombinedFlight temp=null;
-        Scanner sc=new Scanner(System.in);//tui krechhilis re :-p hya
+        Scanner sc=new Scanner(System.in);
         CombinedFlight filteredFlight[]=new CombinedFlight[cf.flightCount];
         filteredFlight=cf.combine(source,d,d);
         System.out.println("\n\nShowing available flights...");

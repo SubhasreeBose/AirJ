@@ -20,7 +20,7 @@ public class FlightManager {
                 }
             else
                 {
-                    System.out.println("Invalid Entry!"); 
+                    System.out.println(argsv[2]+" display is not implemented."); 
                 }
            }
          else if(argsv.length==2)
