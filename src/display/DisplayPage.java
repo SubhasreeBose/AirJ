@@ -150,7 +150,7 @@ public class DisplayPage extends JFrame {
         Icon imgline=new ImageIcon("Images\\line.png");
         JLabel Lline1=new JLabel("", imgline, SwingConstants.LEFT);
         JLabel Lline2=new JLabel("", imgline, SwingConstants.LEFT);
-        JLabel Lline3=new JLabel("", imgline, SwingConstants.LEFT);
+        
         
         JLabel LThree=new JLabel("\uf00c");
         LThree.setFont(f.sm);

@@ -257,6 +257,7 @@ public class BookingPage extends JFrame{
         display.setFont(f.sm);
         display.setForeground(Color.white);
         JLabel book=new JLabel("<html><B><font size=\"2\">Book Flight</font></B></html>");
+        book.setForeground(Color.white);
         
         LOne.setBounds(50, 100, 50, 50);
         LTwo.setBounds(300, 100, 50, 50);

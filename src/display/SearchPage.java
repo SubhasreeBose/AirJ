@@ -149,8 +149,7 @@ public class SearchPage extends JFrame{
        
         
         JLabel LDate=new JLabel("<html><B><font color= \"white\"size=\"4\">DEPARTS ON</font></B></html>");
-        //Icon imgdate = new ImageIcon("Images\\date.png");
-        //JLabel Limgdate = new JLabel("", imgdate, SwingConstants.LEFT);
+        
         JLabel Limgdate = new JLabel("\uf073");
         Limgdate.setFont(f.sm);
         Limgdate.setForeground(Color.white);
