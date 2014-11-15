@@ -83,7 +83,7 @@ public class SearchPage extends JFrame{
         
         frame=new JFrame("Search");
         frame.setSize(650, 650);
-        //frame.setIconImage(img.getImage());
+        
    
         
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -105,60 +105,50 @@ public class SearchPage extends JFrame{
         
        
         FontAwesome f=new FontAwesome();
-        //JLabel LTo=new JLabel("\uf0c0");
-        //LTo.setFont(LTo.getFont().deriveFont(12));
+        
         JLabel LTo=new JLabel("<html><B><font size=\"4\" >To</font></B></html>");
-        //FontAwesome f=new FontAwesome();
-        //LTo.setFont(f.sm);
+        
         
         
         JLabel LFrom=new JLabel("<html><B><font size=\"4\">From</font></B></html>");
-        //Icon imgarrow = new ImageIcon("Images\\arrow.png"); 
+         
         
         JLabel Larrow=new JLabel("\uf072");
         Larrow.setFont(f.lg);
         Larrow.setForeground(Color.white);
-        //JLabel Larrow=new JLabel("",imgarrow,SwingConstants.LEFT);
+        
         JLabel LPlace=new JLabel("<html>SINGAPORE</html>");
         CBPlace=new JComboBox(places);
         
-        //JPanel Topane=new JPanel();
-        /*Topane.setLayout(new BorderLayout());
-        Topane.setBounds(400, 220, 170, 80);*/
+       
         LTo.setBounds(430, 220, 40, 30);
         LFrom.setBounds(150, 220, 50, 30);
         LPlace.setBounds(410, 260, 170, 20);
         CBPlace.setBounds(130, 260, 100, 20);
         Larrow.setBounds(300, 240, 150, 50); 
         
-        /*Topane.add(LTo);
-        Topane.add(LPlace);
         
-        Topane.setBackground(Color.decode("#1abc9c"));*/
         
         LTo.setForeground(Color.white);
         LFrom.setForeground(Color.white);
         LPlace.setForeground(Color.white);
-        //CBPlace.setForeground(Color.white);
         
         
         
         
-        JPanel pane=new JPanel();
+        
+       /*JPanel pane=new JPanel();
         pane.setLayout(new BorderLayout());
-        //pane.add(Topane,BorderLayout.EAST);
-       // pane.add(LTo,BorderLayout.EAST);
-        //pane.add(LFrom);
         pane.add(LPlace);
         pane.add(Larrow);
         pane.add(CBPlace);
         
         pane.setBounds(0,220,650,80);
-        pane.setBackground(Color.decode("#1abc9c"));
+        pane.setBackground(Color.decode("#1abc9c"));*/
         //pane.setBackground(Color.decode("#7f8c8d"));
        
         
-        JLabel LDate=new JLabel("<html><B><font color= \"white\"size=\"4\">Departs on</font></B></html>");
+        JLabel LDate=new JLabel("<html><B><font color= \"white\"size=\"4\">DEPARTS ON</font></B></html>");
         //Icon imgdate = new ImageIcon("Images\\date.png");
         //JLabel Limgdate = new JLabel("", imgdate, SwingConstants.LEFT);
         JLabel Limgdate = new JLabel("\uf073");
@@ -172,8 +162,8 @@ public class SearchPage extends JFrame{
         
         LDate.setBounds(130, 350, 100, 20);
         Limgdate.setBounds(150,310,30,30);
-        CBDated.setBounds(115,385,40,20);
-        CBDatem.setBounds(165,385,50,20);
+        CBDated.setBounds(105,385,40,20);
+        CBDatem.setBounds(155,385,50,20);
         CBDatey.setBounds(215,385,60,20); 
         CBDated.setBackground(Color.decode("#1abc9c"));
         CBDatem.setBackground(Color.decode("#1abc9c"));
@@ -188,7 +178,7 @@ public class SearchPage extends JFrame{
         JLabel Limgpassenger=new JLabel("\uf0c0");
         Limgpassenger.setFont(f.sm);
         Limgpassenger.setForeground(Color.white);
-        JLabel LPerson=new JLabel("<html><B><font color=\"white\" size=\"4\">Passenger Count</font></B></html>");
+        JLabel LPerson=new JLabel("<html><B><font color=\"white\" size=\"4\">PASSENGER COUNT</font></B></html>");
         SlidePerson=new JSlider(JSlider.HORIZONTAL,min,max,initial);
         SlidePerson.setMajorTickSpacing(1);
         SlidePerson.setMinorTickSpacing(1);
@@ -197,7 +187,7 @@ public class SearchPage extends JFrame{
         SlidePerson.setBackground(Color.decode("#1abc9c"));
         SlidePerson.setForeground(Color.white);
         
-        LPerson.setBounds(410, 340, 130, 30);//berie jachhe to lekata baire
+        LPerson.setBounds(410, 340, 200, 30);
         SlidePerson.setBounds(390, 380, 185, 50);
         Limgpassenger.setBounds(430, 295, 50, 50);  
         
@@ -247,11 +237,11 @@ public class SearchPage extends JFrame{
         JLabel Lline1=new JLabel("", imgline, SwingConstants.LEFT);
         JLabel Lline2=new JLabel("", imgline, SwingConstants.LEFT);
         JLabel Lline3=new JLabel("", imgline, SwingConstants.LEFT);
-        Icon imgThree=new ImageIcon("Images\\3_nc.png");
+        
         JLabel LThree=new JLabel("\uf00c");
         LThree.setFont(f.sm);
         LThree.setForeground(Color.white);
-        Icon imgTwo=new ImageIcon("Images\\2_nc.png");
+        
         JLabel LTwo=new JLabel("\uf0ca");
         LTwo.setFont(f.sm);
         LTwo.setForeground(Color.white);
@@ -297,7 +287,7 @@ public class SearchPage extends JFrame{
         frame.add(Limgpassenger);
         frame.add(Limgdate);
         frame.add(fillpane);    
-        frame.add(pane);
+        //frame.add(pane);
         frame.add(licenseBox);        
         frame.add(BSearch);        
         frame.add(pbar);

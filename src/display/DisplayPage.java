@@ -7,6 +7,7 @@ import display.*;
 import data.*;
 import persistence.*;
 import util.*;
+
 import java.awt.event.*;
 import java.awt.*;
 import java.text.SimpleDateFormat;
@@ -56,7 +57,8 @@ public class DisplayPage extends JFrame {
        
         
         frame=new JFrame("Display");
-        frame.setSize(650, 650);
+        frame.setSize(650, 660);
+        
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (screenSize.width - frame.getWidth()) / 2;
         int y = (screenSize.height - frame.getHeight()) / 2;
@@ -66,12 +68,17 @@ public class DisplayPage extends JFrame {
         
         this.objsearch=objsearch;
         
+        FontAwesome f=new FontAwesome();
+        
         JButton BConfirm=new JButton("Confirm");
         BConfirm.setBounds(460,520,140,40);
         
         JLabel LDummy=new JLabel("<html><B> </B></html>");
         JLabel LFlight1=new JLabel("<html><B>First Flight  </B></html>");
+        LFlight1.setForeground(Color.white);
         JLabel LFlight2=new JLabel("<html><B> Second Flight </B></html>");
+        LFlight2.setForeground(Color.white);
+        
         TxtFlight=new JTextField();
         TxtTime=new JTextField();
         TxtFlight.setBounds(120,500,100,30);
@@ -81,22 +88,30 @@ public class DisplayPage extends JFrame {
         TxtFlight.setEditable(false);
         TxtTime.setEditable(false);
         
-        Icon img1 = new ImageIcon("Images/index.png");
-        JLabel LLogo = new JLabel("<html><i><font face=\"verdana\" size=\"3\" color=\"blue\">The smarter,easier and faster way to book flights.</font></i></html>", img1, SwingConstants.LEFT);
-        LLogo.setBounds(0, 0, 700, 50);
+        Icon img1 = new ImageIcon("Images/logo-without-bg.png");
+        JLabel LLogo = new JLabel("<html><i><font face=\"verdana\" size=\"3\" color=\"white\">The smarter,easier and faster way to book flights.</font></i></html>", img1, SwingConstants.LEFT);
+        LLogo.setBounds(0, 0, 700, 70);
      
         
         JLabel LResult=new JLabel("Total no.of available flights : "+cf.flightCount+"");
         LResult.setBounds(30,230,650,30);
+        LResult.setForeground(Color.white);
         
         TFlight = new JTable(row, col);
         TFlight.getColumnModel().getColumn(0).setPreferredWidth(45);
-        TFlight.getColumnModel().getColumn(1).setPreferredWidth(45);
-        TFlight.getColumnModel().getColumn(2).setPreferredWidth(45);
+        TFlight.getColumnModel().getColumn(1).setPreferredWidth(35);
+        TFlight.getColumnModel().getColumn(2).setPreferredWidth(40);
+        TFlight.getColumnModel().getColumn(3).setPreferredWidth(65);
+        TFlight.getColumnModel().getColumn(4).setPreferredWidth(65);
         TFlight.getColumnModel().getColumn(5).setPreferredWidth(45);
-        TFlight.getColumnModel().getColumn(6).setPreferredWidth(45);
-        TFlight.getColumnModel().getColumn(7).setPreferredWidth(45);
-        TFlight.getTableHeader().setBackground(Color.decode("#E0FFFF"));
+        TFlight.getColumnModel().getColumn(6).setPreferredWidth(35);
+        TFlight.getColumnModel().getColumn(7).setPreferredWidth(60);
+        
+        // #2c3e50			#34495e
+        TFlight.getTableHeader().setBackground(Color.decode("#2c3e50"));
+        TFlight.getTableHeader().setForeground(Color.white);
+        TFlight.getTableHeader().setAlignmentX(LEFT_ALIGNMENT);
+        TFlight.setAlignmentX(LEFT_ALIGNMENT);
            
         for (int c = 0; c < TFlight.getColumnCount(); c++) {
             Class<?> col_class = TFlight.getColumnClass(c);
@@ -107,47 +122,70 @@ public class DisplayPage extends JFrame {
         
         JScrollPane JSP1 = new JScrollPane(TFlight, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         JSP1.setBounds(0, 270,650, 200);
-        JSP1.setBackground(Color.white);
+        TFlight.setBackground(Color.decode("#1abc9c"));
+        TFlight.setForeground(Color.white);
+        JSP1.setBackground(Color.decode("#34495e"));
         
         JSP1.setVisible(true);
         
         JLabel selection=new JLabel();
         String str1="Flight result for : To SINGAPORE from "+objsearch.CBPlace.getSelectedItem().toString()+ " on " +objsearch.CBDated.getSelectedItem().toString() +" October 2014 for " + objsearch.SlidePerson.getValue()+" pasengers";
         selection.setText(str1);
-        selection.setBounds(30,170,570,50);
+        selection.setBounds(30,190,570,50);
+        selection.setForeground(Color.white);
+        
+        JPanel pane=new JPanel();
+        pane.add(selection);
+        pane.add(LResult);
+        pane.setBackground(Color.decode("#2c3e50"));
+        pane.setBounds(0,180,650,85);
+       
+        
         
         Icon imgedit=new ImageIcon("Images\\Edit.gif");
         
-        Icon imgone=new ImageIcon("Images\\1.jpg");
-        LOne=new JLabel("", imgone, SwingConstants.LEFT);
-        Icon imgThree=new ImageIcon("Images\\3_nc.png");
-        JLabel LThree=new JLabel("", imgThree, SwingConstants.LEFT);
-        Icon imgTwo=new ImageIcon("Images\\two.jpg");
-        JLabel LTwo=new JLabel("", imgTwo, SwingConstants.LEFT);
-        search=new JLabel("<html><B><font size=\"2\">Search Flight</font></B></html>",imgedit,SwingConstants.LEFT);
-        JLabel display=new JLabel("<html><B><font size=\"2\">Select Flight</font></B></html>");
-        JLabel book=new JLabel("<html><B><font size=\"2\">Book Flight</font></B></html>");
+        JLabel LOne=new JLabel("\uf002");
+        LOne.setFont(f.sm);
+        LOne.setForeground(Color.decode("#1abc9c"));
+        Icon imgline=new ImageIcon("Images\\line.png");
+        JLabel Lline1=new JLabel("", imgline, SwingConstants.LEFT);
+        JLabel Lline2=new JLabel("", imgline, SwingConstants.LEFT);
+        JLabel Lline3=new JLabel("", imgline, SwingConstants.LEFT);
         
-        LOne.setBounds(50, 90, 50, 50);
-        LTwo.setBounds(300, 75, 70, 90);
-        LThree.setBounds(550, 90, 50, 50);
-        search.setBounds(50, 140, 150, 30);
+        JLabel LThree=new JLabel("\uf00c");
+        LThree.setFont(f.sm);
+        LThree.setForeground(Color.white);
+        
+        JLabel LTwo=new JLabel("\uf0ca");
+        LTwo.setFont(f.sm);
+        LTwo.setForeground(Color.white);
+        //search=new JLabel("<html><B><font color=\"white\"size=\"2\">Search Flight</font></B></html>");
+        search=new JLabel("\uf044");
+        search.setFont(f.sm);
+        search.setForeground(Color.white);
+        
+        JLabel display=new JLabel("<html><B><font color=\"white\" size=\"2\">Select Flight</font></B></html>");
+        JLabel book=new JLabel("<html><B><font color=\"white\" size=\"2\">Book Flight</font></B></html>");
+        
+        LOne.setBounds(40, 75, 70, 100);
+        LTwo.setBounds(300, 100, 50, 50);
+        LThree.setBounds(550, 100, 50, 50);
+        search.setBounds(50, 140, 50, 30);
         display.setBounds(300, 140, 150, 30);
         book.setBounds(530, 140, 150, 30);
         
        
         
-        Icon imgline1=new ImageIcon("Images\\line_blue.png");
-        Icon imgline2=new ImageIcon("Images\\red.jpg");
-        JLabel Lline1=new JLabel("", imgline2, SwingConstants.LEFT);
-        JLabel Lline2=new JLabel("", imgline1, SwingConstants.LEFT);
-        Lline1.setBounds(90,100,200,20);
-        Lline2.setBounds(350,110,200,20);
+        
+        Lline1.setBounds(90,120,200,20);
+        Lline2.setBounds(340,120,200,20);
         TFlight.setShowVerticalLines(false);
         TFlight.setRowHeight(30);
+        
         frame.add(Lline1);
         frame.add(Lline2);
         frame.add(LOne);
+        
         
         frame.add(LTwo);
         frame.add(LThree);
@@ -163,8 +201,9 @@ public class DisplayPage extends JFrame {
         frame.add(LLogo);
         frame.add(selection);
         frame.add(LResult);
+        frame.add(pane);
         frame.add(LDummy);
-        frame.setBackground(Color.white);
+        frame.getContentPane().setBackground(Color.decode("#2c3e50"));
         frame.setVisible(true);
          
         TFlight.addMouseListener(new MouseAdapter() {  
