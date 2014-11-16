@@ -27,7 +27,7 @@ public class FileRead implements Persistence {
         String str; 
         int i = 0;
         try {
-           reader = new FileReader("Files/silkair.Schedule1.csv");
+           reader = new FileReader("Files/silkair.Schedule.csv");
            br = new BufferedReader(reader);
         }
         catch(FileNotFoundException e) {
@@ -53,7 +53,7 @@ public class FileRead implements Persistence {
         i = 0;    
 
         try {
-            reader = new FileReader("Files/silkair.Schedule1.csv");
+            reader = new FileReader("Files/silkair.Schedule.csv");
             br = new BufferedReader(reader);
             while(i<3) {
                 str = br.readLine();
@@ -158,7 +158,7 @@ public class FileRead implements Persistence {
         String str = ""; 
         int i = 0;
         try {
-           reader = new FileReader("Files/silkair.Schedule1.csv");
+           reader = new FileReader("Files/silkair.Schedule.csv");
            br = new BufferedReader(reader);
         }
         catch(FileNotFoundException e) {
@@ -187,7 +187,7 @@ public class FileRead implements Persistence {
         String str = "", temp = "";
         int i = 0;
         try {
-           reader = new FileReader("Files/spicejet.Schedule1.csv");
+           reader = new FileReader("Files/spicejet.Schedule.csv");
            br = new BufferedReader(reader);
         }
         catch(FileNotFoundException e) {
@@ -214,7 +214,7 @@ public class FileRead implements Persistence {
         i=0;
         
         try {
-            reader = new FileReader("Files/spicejet.Schedule1.csv");
+            reader = new FileReader("Files/spicejet.Schedule.csv");
             br = new BufferedReader(reader);            
             str = br.readLine();            
             str = br.readLine();
@@ -340,7 +340,6 @@ public class FileRead implements Persistence {
             File f = new File("Files/book.csv");
             if(!f.exists()){
                 f.createNewFile();
-            System.out.println("File Created!");
             }
             else {
             	for(i=0; i<size; i++) {

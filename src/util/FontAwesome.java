@@ -5,7 +5,7 @@ import java.io.InputStream;
 
 public class FontAwesome {
 	public Font lg;
-	public Font sm;
+	public Font sm,m;
 	
 	public FontAwesome(){
 		
@@ -14,6 +14,7 @@ public class FontAwesome {
             lg = lg.deriveFont(Font.PLAIN, 48f);
 
             sm = lg.deriveFont(Font.PLAIN, 24f);
+            m= lg.deriveFont(Font.PLAIN, 12f);
             
         } catch (IOException | FontFormatException exp) {
             exp.printStackTrace();

@@ -35,8 +35,11 @@ public class BookingPage extends JFrame {
         FontAwesome f=new FontAwesome();
                 
         Icon img1 = new ImageIcon("Images/logo-without-bg.png");
-        JLabel LLogo = new JLabel("<html><i><font face=\"verdana\" size=\"3\" color=\"white\">The smarter,easier and faster way to book flights.</font></i></html>", img1, SwingConstants.LEFT);
+        JLabel LLogo = new JLabel("", img1, SwingConstants.LEFT);
         LLogo.setBounds(0, 0, 700,70);
+        JLabel Ltag=new JLabel("<html><i><font face=\"verdana\" size=\"3\" color=\"white\">The smarter, easier and faster way to fly.</font></i></html>");
+        Ltag.setBounds(130, 50, 350, 20);
+        Ltag.setForeground(Color.white);
    
         Icon imgedit=new ImageIcon("Images/Edit.gif");        
         
@@ -48,10 +51,13 @@ public class BookingPage extends JFrame {
         LEmail.setForeground(Color.white);
         JLabel info=new JLabel("<html><font color=red size=1> * Details of your booking will be e-mailed to you</font></html>");
         
-        Icon imglogo1 = new ImageIcon("Images\\silkair.png");
-        Icon imglogo2 = new ImageIcon("Images\\spicejet.png");
-        JLabel Limglogo1 = new JLabel("", imglogo1, SwingConstants.LEFT);
-        JLabel Limglogo2 = new JLabel("", imglogo2, SwingConstants.LEFT);  
+      
+        JLabel Limglogo1 = new JLabel("\uf1d9");
+        Limglogo1.setFont(f.sm);
+        Limglogo1.setForeground(Color.white);
+        JLabel Limglogo2 = new JLabel("\uf1d8"); 
+        Limglogo2.setFont(f.sm);
+        Limglogo2.setForeground(Color.white);
         JLabel Lflightno1=new JLabel();
         flight1=(String) objdisplay.TFlight.getModel().getValueAt(objdisplay.selRow, 1);
         Lflightno1.setText(flight1);
@@ -88,12 +94,15 @@ public class BookingPage extends JFrame {
         LFlightD1.setForeground(Color.white);
         JLabel LFlightD2=new JLabel("<html><B>SINGAPORE</B></html>");
         LFlightD2.setForeground(Color.white);
-        Icon imgarrow1 = new ImageIcon("Images\\arrowplane.jpg");
-        JLabel Limgarrow1 = new JLabel("", imgarrow1, SwingConstants.LEFT);
-        JLabel Limgarrow2 = new JLabel("", imgarrow1, SwingConstants.LEFT);
+        Icon imgline=new ImageIcon("Images\\line.png");
+        JLabel Limgarrow1 = new JLabel("", imgline, SwingConstants.LEFT);
+        JLabel Limgarrow2 = new JLabel("", imgline, SwingConstants.LEFT);
         
-        Icon imgtime = new ImageIcon("Images\\time.jpg");
-        JLabel LTime=new JLabel("<html><B>Total Time Duration : "+(String) objdisplay.TFlight.getModel().getValueAt(objdisplay.selRow, 8)+"</B></html>",imgtime,SwingConstants.LEFT);
+        JLabel imgtime = new JLabel("\uf017");
+        imgtime.setFont(f.sm);
+        imgtime.setForeground(Color.white);
+        imgtime.setBounds(50, 410, 100, 50);
+        JLabel LTime=new JLabel("<html><B>Total Time Duration : "+(String) objdisplay.TFlight.getModel().getValueAt(objdisplay.selRow, 8)+"</B></html>");
         LTime.setForeground(Color.white);
         
         licenseBox = new JCheckBox(" I agree that flight schedule is subject to change under certain conditions.");
@@ -108,15 +117,15 @@ public class BookingPage extends JFrame {
         selection.setForeground(Color.white);        
         selection.setBounds(50,180,170,50);
          
-        Limglogo1.setBounds(50,240,50,50);
-        Limglogo2.setBounds(50,340,50,50);
+        Limglogo1.setBounds(50,235,50,50);
+        Limglogo2.setBounds(50,335,50,50);
         LFlightS1.setBounds(120,250,300,30);
         LFlightD1.setBounds(520,250,300,30);
         LFlightS2.setBounds(120,350,300,30);
         LFlightD2.setBounds(520,350,250,30);
-        Limgarrow1.setBounds(180,220,300,50);
-        Limgarrow2.setBounds(180,320,300,50);
-        LTime.setBounds(50,420,300,30);        
+        Limgarrow1.setBounds(198,237,300,50);
+        Limgarrow2.setBounds(198,337,300,50);
+        LTime.setBounds(100,425,300,30);        
         TxtName.setBounds(110, 480, 180, 20);
         LName.setBounds(50, 480, 40, 20);
         Txtemail.setBounds(420, 480, 180, 20);
@@ -134,11 +143,32 @@ public class BookingPage extends JFrame {
         Larr2.setBounds(250,360,250,50);
         Ldept2.setBounds(370,360,250,50);
         
+        JPanel pane=new JPanel();
+        pane.add(Lflightno1);
+        pane.add(Lflightno2);
+        pane.add(Larr1);
+        pane.add(Larr2);
+        pane.add(Ldept1);
+        pane.add(Ldept2);
+        pane.add(Limglogo1);
+        pane.add(Limglogo2);
+        pane.add(LTime);
+        pane.add(LFlightS1);
+        pane.add(Limglogo2);
+        pane.add(LFlightS2);
+        pane.add(LFlightD2);
+        pane.add(LFlightD1);
+        pane.add(Limgarrow2);
+        pane.add(Limgarrow1);
+        pane.setBounds(0,220,650,300);
+        pane.setBackground(Color.decode("#1abc9c"));
+        
+        
         
         JLabel LOne=new JLabel("\uf002");
         LOne.setFont(f.sm);
         LOne.setForeground(Color.decode("#1abc9c"));
-        Icon imgline=new ImageIcon("Images\\line.png");
+        
         JLabel Lline1=new JLabel("", imgline, SwingConstants.LEFT);
         JLabel Lline2=new JLabel("", imgline, SwingConstants.LEFT);
         JLabel Lline3=new JLabel("", imgline, SwingConstants.LEFT);
@@ -171,6 +201,7 @@ public class BookingPage extends JFrame {
         
         Bframe.add(Lline1);
         Bframe.add(Lline2);
+        Bframe.add(Ltag);
         Bframe.add(LOne);
         Bframe.add(LTwo);
         Bframe.add(LThree);
@@ -194,6 +225,7 @@ public class BookingPage extends JFrame {
         Bframe.add(LFlightD2);
         Bframe.add(Limgarrow1);
         Bframe.add(Limgarrow2);
+        Bframe.add(imgtime);
         Bframe.add(LDate);      
         Bframe.add(selection);
         Bframe.add(Lflightno1);
@@ -202,8 +234,11 @@ public class BookingPage extends JFrame {
         Bframe.add(Ldept2);
         Bframe.add(Ldept1);
         Bframe.add(info);
+        
         Bframe.add(Larr2);
+        Bframe.add(pane);
         Bframe.add(LDummy);
+        
         Bframe.setVisible(true);
         Bframe.setResizable(false);
         Bframe.getContentPane().setBackground(Color.decode("#2c3e50"));

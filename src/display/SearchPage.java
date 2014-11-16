@@ -24,14 +24,14 @@ public class SearchPage extends JFrame{
 
     JPanel Psearch=new JPanel(null);
     String[] places = {"MUMBAI", "DELHI", "PUNE"};
-    String[] number={"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25"};
+    String[] number={"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","30","31"};
     JProgressBar pbar;
     
     JButton BSearch;
     JFrame frame;
     Timer timer;
     SearchPage objsearch;
-    JComboBox CBPlace,CBDated;
+    JComboBox CBPlace,CBDatem,CBDatey,CBDated;
     JSlider SlidePerson;
     JCheckBox licenseBox;
    
@@ -40,8 +40,8 @@ public class SearchPage extends JFrame{
         
         //ImageIcon img = new ImageIcon("Images/images.jpg");
         //frame.setIconImage(img.getImage());
-        String []month = {"Oct"};
-        String []year = {"2014"};
+        String []month = {"Oct","Nov","Dec","Jan","Feb","March"};
+        String []year = {"2014","2015"};
         
         frame=new JFrame("Search");
         frame.setSize(650, 650);
@@ -56,8 +56,11 @@ public class SearchPage extends JFrame{
        
       
         Icon img1 = new ImageIcon("Images\\logo-without-bg.png");
-        JLabel LLogo = new JLabel("<html><i><font face=\"verdana\" size=\"3\" color=\"white\">The smarter, easier and faster way to fly.</font></i></html>", img1, SwingConstants.LEFT);
-        LLogo.setBounds(0, 0, 700, 70);
+        JLabel LLogo = new JLabel("", img1, SwingConstants.LEFT);
+        JLabel Ltag=new JLabel("<html><i><font face=\"verdana\" size=\"3\" color=\"white\">The smarter, easier and faster way to fly.</font></i></html>");
+        Ltag.setBounds(130, 50, 350, 20);
+        Ltag.setForeground(Color.white);
+        LLogo.setBounds(0, 0, 370, 70);
         LLogo.setVisible(true);
         
         JLabel LHeading=new JLabel("<html><font face=\"Castellar\" size=\"4\" color=\"white\">Fly anywhere with us. Book flights in 3 simple steps.</font></html>");        
@@ -114,8 +117,8 @@ public class SearchPage extends JFrame{
          
         
         CBDated=new JComboBox(number);
-        JComboBox CBDatem=new JComboBox(month);
-        JComboBox CBDatey=new JComboBox(year);
+        CBDatem=new JComboBox(month);
+        CBDatey=new JComboBox(year);
         
         LDate.setBounds(130, 350, 100, 20);
         Limgdate.setBounds(150,310,30,30);
@@ -128,6 +131,8 @@ public class SearchPage extends JFrame{
         CBDated.setForeground(Color.white);
         CBDatem.setForeground(Color.white);
         CBDatey.setForeground(Color.white);
+        CBPlace.setForeground(Color.white);
+        CBPlace.setBackground(Color.decode("#1abc9c"));
         
     
         //Icon imgpassenger = new ImageIcon("Images\\passenger.png");
@@ -142,6 +147,7 @@ public class SearchPage extends JFrame{
         SlidePerson.setPaintTicks(true);
         SlidePerson.setPaintLabels(true);
         SlidePerson.setBackground(Color.decode("#1abc9c"));
+        
         SlidePerson.setForeground(Color.white);
         
         LPerson.setBounds(410, 340, 200, 30);
@@ -154,6 +160,8 @@ public class SearchPage extends JFrame{
         licenseBox.setBackground(Color.decode("#2c3e50"));
         licenseBox.setForeground(Color.white);
           
+        
+        
         fillpane.add(LFrom);
         fillpane.add(LTo);
         fillpane.add(Larrow);
@@ -217,8 +225,10 @@ public class SearchPage extends JFrame{
         Lline3.setBounds(70,290,570,20);
         fillpane.add(Lline3);
         
-        
+       
+        	
         frame.add(LOne);
+        frame.add(Ltag);
         //frame.add(Topane);
         frame.add(Lline3);
         frame.add(LTwo);
@@ -262,6 +272,7 @@ public class SearchPage extends JFrame{
         
         objsearch=this;
         
+        
         timer = new Timer(interval, new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 i++;
@@ -284,5 +295,6 @@ public class SearchPage extends JFrame{
             }
         });       
     }
+    
         
 }

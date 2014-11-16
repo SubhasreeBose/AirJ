@@ -12,7 +12,7 @@ public class CombinedFlight {
     private String deptSilk,arrSilk,arrSpice,deptSpice,intermediate,totalTime,via,spiceFlightNo,silkFlightNo;
     final int ADDED_TIME = 150;
     
-    public CombinedFlight(String source,int spiceDay,int silkDay, int passCount) {
+    public CombinedFlight(String source,int Day,int month, int passCount) {
         int i,j;
         deptSilk="";
         arrSilk="";
@@ -23,15 +23,15 @@ public class CombinedFlight {
         via="";
         spiceFlightNo="";
         silkFlightNo="";
-        //String date = spiceDay +"/";
+        String date = Day +"/"+month;
         
         SilkAirSchedule silkAir = new SilkAirSchedule();
-        silkAir.getBookedFilghts("4/11", passCount);
+        silkAir.getBookedFilghts(date.trim(), passCount);
         SpiceJetSchedule spiceJet = new SpiceJetSchedule();
-        spiceJet.getBookedFilghts("4/11", passCount);
+        spiceJet.getBookedFilghts(date.trim(), passCount);
         
         for(i=0;i<spiceJet.size;i++) {
-            if(spiceJet.flights[i].getSource().compareTo(source) == 0 && spiceJet.flights[i].getFrequency(spiceDay)) { 
+            if(spiceJet.flights[i].getSource().compareTo(source) == 0 && spiceJet.flights[i].getFrequency(Day)) { 
                 for(j=0;j<silkAir.size;j++) { 
                     String silkSource=silkAir.flights[j].getSource();
                     int depTimeHr = silkAir.getHr(j,0);
@@ -43,7 +43,7 @@ public class CombinedFlight {
                     int arrTimeHr = spiceJet.getHr(i,1);
                     int arrTimeMin = spiceJet.getMin(i,1);
                     if(spiceDest.compareTo(silkSource.substring(0,silkSource.lastIndexOf("(")-1).toUpperCase().trim())==0 ) { 
-                        if(silkAir.flights[j].getFrequency(silkDay)) {
+                        if(silkAir.flights[j].getFrequency(Day)) {
                         	int time = timediff(arrTimeHr, arrTimeMin, depTimeHr, depTimeMin, false); 
                             if(time >= 120 && time <= 360)
                                 flightCount++;
@@ -54,7 +54,7 @@ public class CombinedFlight {
                      * if the flight MI 475 which departs at 00:45
                      * is available or not.
                      */
-                    if(silkAir.flights[j].getFrequency((silkDay+1)%7))
+                    if(silkAir.flights[j].getFrequency((Day+1)%7))
                     	if(silkAir.getHr(j,  0) < 6)
                     		flightCount++;
                 }			   
@@ -117,20 +117,21 @@ public class CombinedFlight {
        return(arrSpice);
     }
     
-    public CombinedFlight[] combine(String source,int spiceDay,int silkDay, int passCount) {
+    public CombinedFlight[] combine(String source,int Day,int month, int passCount) {
         int i,j,totalTime,Count=0;
+        String date = Day+"/"+month;
         SilkAirSchedule silkAir = new SilkAirSchedule();
-        silkAir.getBookedFilghts("4/11", passCount);
+        silkAir.getBookedFilghts(date, passCount);
         SpiceJetSchedule spiceJet = new SpiceJetSchedule();
-        spiceJet.getBookedFilghts("4/11", passCount);
+        spiceJet.getBookedFilghts(date, passCount);
         
         int duration[]=new int[flightCount];
         CombinedFlight cf[]=new CombinedFlight[flightCount];
         for(i=0;i<flightCount;i++)
-            cf[i]=new CombinedFlight(source,spiceDay,silkDay, passCount);
+            cf[i]=new CombinedFlight(source,Day,month, passCount);
         
         for(i=0;i<spiceJet.size;i++) {
-            if(spiceJet.flights[i].getSource().compareTo(source) == 0 && spiceJet.flights[i].getFrequency(spiceDay)) { 
+            if(spiceJet.flights[i].getSource().compareTo(source) == 0 && spiceJet.flights[i].getFrequency(Day)) { 
                 for(j=0;j<silkAir.size;j++) {  
                     String silkSource=silkAir.flights[j].getSource(); 
                     int depTimeHr = silkAir.getHr(j,0);
@@ -143,7 +144,7 @@ public class CombinedFlight {
                     int arrTimeMin = spiceJet.getMin(i,1);
                     
                     if(spiceDest.compareTo(silkSource.substring(0,silkSource.lastIndexOf("(")-1).toUpperCase().trim())==0 ) { 
-                        if(silkAir.flights[j].getFrequency(silkDay)) {
+                        if(silkAir.flights[j].getFrequency(Day)) {
                         	int time = timediff(arrTimeHr, arrTimeMin, depTimeHr, depTimeMin, false); 
                             if(time >= 120 && time <= 360) {
                                 cf[Count].setDeptSpice(spiceJet.flights[i].getDepTime());
@@ -172,7 +173,7 @@ public class CombinedFlight {
                          * if the flight MI 475 which departs at 00:45
                          * is available or not.
                          */
-                        if(silkAir.flights[j].getFrequency((silkDay+1)%7)) {
+                        if(silkAir.flights[j].getFrequency((Day+1)%7)) {
                         	if(silkAir.getHr(j,  0) < 6) {
                         		int time = timediff(arrTimeHr, arrTimeMin, depTimeHr, depTimeMin, true); 
                                 if(time >= 120 && time <= 360) {                            

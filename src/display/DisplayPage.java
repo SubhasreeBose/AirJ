@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.swing.*;
+
 import data.CombinedFlight;
 
 public class DisplayPage extends JFrame {
@@ -28,16 +29,19 @@ public class DisplayPage extends JFrame {
     public DisplayPage(SearchPage objsearch) {
 
         String source=objsearch.CBPlace.getSelectedItem().toString();
-        int spiceDay=check(Integer.parseInt(objsearch.CBDated.getSelectedItem().toString()));
-        int silkDay = check(Integer.parseInt(objsearch.CBDated.getSelectedItem().toString()));
+        ValidateDate vd=new ValidateDate(objsearch.CBDated.getSelectedItem().toString(),objsearch.CBDatem.getSelectedItem().toString(),objsearch.CBDatey.getSelectedItem().toString());
+    	
+        int month = vd.checkMonth();
+        int day=vd.checkDay(Integer.parseInt(objsearch.CBDated.getSelectedItem().toString()), month);
+        
         
         //**************************************************
-        int passCount = 6; //PassCount needs to be input!!
+        int passCount = objsearch.SlidePerson.getValue(); 
         //**************************************************
         
-        CombinedFlight cf = new  CombinedFlight(source, spiceDay, silkDay, passCount);
+        CombinedFlight cf = new  CombinedFlight(source, day, month, passCount);
         CombinedFlight filteredFlight[]=new CombinedFlight[cf.flightCount];
-        filteredFlight=cf.combine(source, spiceDay, silkDay, passCount);
+        filteredFlight=cf.combine(source, day, month, passCount);
         row=new String[cf.flightCount][9];
         
         int i;
@@ -89,8 +93,11 @@ public class DisplayPage extends JFrame {
         TxtTime.setEditable(false);
         
         Icon img1 = new ImageIcon("Images/logo-without-bg.png");
-        JLabel LLogo = new JLabel("<html><i><font face=\"verdana\" size=\"3\" color=\"white\">The smarter,easier and faster way to book flights.</font></i></html>", img1, SwingConstants.LEFT);
+        JLabel LLogo = new JLabel("", img1, SwingConstants.LEFT);
         LLogo.setBounds(0, 0, 700, 70);
+        JLabel Ltag=new JLabel("<html><i><font face=\"verdana\" size=\"3\" color=\"white\">The smarter, easier and faster way to fly.</font></i></html>");
+        Ltag.setBounds(130, 50, 350, 20);
+        Ltag.setForeground(Color.white);
      
         
         JLabel LResult=new JLabel("Total no.of available flights : "+cf.flightCount+"");
@@ -105,7 +112,8 @@ public class DisplayPage extends JFrame {
         TFlight.getColumnModel().getColumn(4).setPreferredWidth(65);
         TFlight.getColumnModel().getColumn(5).setPreferredWidth(45);
         TFlight.getColumnModel().getColumn(6).setPreferredWidth(35);
-        TFlight.getColumnModel().getColumn(7).setPreferredWidth(60);
+        //TFlight.getColumnModel().getColumn(7).setPreferredWidth(60);
+        TFlight.getColumnModel().getColumn(8).setPreferredWidth(65);
         
         // #2c3e50			#34495e
         TFlight.getTableHeader().setBackground(Color.decode("#2c3e50"));
@@ -121,7 +129,7 @@ public class DisplayPage extends JFrame {
         TFlight.setFillsViewportHeight(true);
         
         JScrollPane JSP1 = new JScrollPane(TFlight, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        JSP1.setBounds(0, 270,650, 200);
+        JSP1.setBounds(2, 270,630, 200);
         TFlight.setBackground(Color.decode("#1abc9c"));
         TFlight.setForeground(Color.white);
         JSP1.setBackground(Color.decode("#34495e"));
@@ -129,7 +137,7 @@ public class DisplayPage extends JFrame {
         JSP1.setVisible(true);
         
         JLabel selection=new JLabel();
-        String str1="Flight result for : To SINGAPORE from "+objsearch.CBPlace.getSelectedItem().toString()+ " on " +objsearch.CBDated.getSelectedItem().toString() +" October 2014 for " + objsearch.SlidePerson.getValue()+" pasengers";
+        String str1="Flight result for : To SINGAPORE from "+objsearch.CBPlace.getSelectedItem().toString()+ " on " +objsearch.CBDated.getSelectedItem().toString() +" "+objsearch.CBDatem.getSelectedItem().toString()+" "+objsearch.CBDatey.getSelectedItem().toString()+"  for " + objsearch.SlidePerson.getValue()+" passengers";
         selection.setText(str1);
         selection.setBounds(30,190,570,50);
         selection.setForeground(Color.white);
@@ -175,7 +183,7 @@ public class DisplayPage extends JFrame {
         book.setBounds(530, 140, 150, 30);
         
        
-        
+        search.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         
         Lline1.setBounds(90,120,200,20);
         Lline2.setBounds(340,120,200,20);
@@ -185,7 +193,7 @@ public class DisplayPage extends JFrame {
         frame.add(Lline1);
         frame.add(Lline2);
         frame.add(LOne);
-        
+        frame.add(Ltag);
         
         frame.add(LTwo);
         frame.add(LThree);
@@ -202,6 +210,7 @@ public class DisplayPage extends JFrame {
         frame.add(selection);
         frame.add(LResult);
         frame.add(pane);
+        
         frame.add(LDummy);
         frame.getContentPane().setBackground(Color.decode("#2c3e50"));
         frame.setVisible(true);
@@ -225,23 +234,5 @@ public class DisplayPage extends JFrame {
 
    
     
-    public static int check(int dd) {
-        Date date = (new GregorianCalendar(2014, 9, dd)).getTime();
-        SimpleDateFormat f = new SimpleDateFormat("EEEE");
-        String d = f.format(date);
-        if(d.compareTo("Sunday") == 0)
-            return 0;
-        else if(d.compareTo("Monday") == 0)
-            return 1;
-        else if(d.compareTo("Tuesday") == 0)
-            return 2;
-        else if(d.compareTo("Wednesday") == 0)
-            return 3;
-        else if(d.compareTo("Thursday") == 0)
-            return 4;
-        else if(d.compareTo("Friday") == 0)
-            return 5;
-        else
-            return 6;
-    }
+    
 }
