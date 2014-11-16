@@ -11,10 +11,10 @@ public class SilkAirSchedule extends Flight {
     public Flight flights[];
     public int size;
 
-    public SilkAirSchedule() {
+    public SilkAirSchedule(String file) {
         FileRead fr = new FileRead();
-        size = fr.silkSize();
-        flights = fr.readSilkAirFile();       
+        size = fr.silkSize(file);
+        flights = fr.readSilkAirFile(file);       
     }
     
     public void getBookedFilghts(String date, int passCount) {

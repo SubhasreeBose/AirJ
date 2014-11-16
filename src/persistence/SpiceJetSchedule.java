@@ -12,9 +12,9 @@ public class SpiceJetSchedule extends Flight {
     public Flight flights[];
     public int size;
     
-    public SpiceJetSchedule() {
+    public SpiceJetSchedule(String file) {
         FileRead fr = new FileRead();
-        flights = fr.readSpiceJetFile();
+        flights = fr.readSpiceJetFile(file);
         size = fr.spiceSize();
     }
     

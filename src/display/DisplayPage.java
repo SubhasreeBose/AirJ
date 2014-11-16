@@ -27,9 +27,10 @@ public class DisplayPage extends JFrame {
     int selRow;
     public int month,day,passCount;
     private CombinedFlight  ff;
+    CombinedFlight filteredFlight[];
     
     
-    public DisplayPage(SearchPage objsearch) {
+    public DisplayPage(SearchPage objsearch,String file1,String file2) {
 
         String source=objsearch.CBPlace.getSelectedItem().toString();
         ValidateDate vd=new ValidateDate(objsearch.CBDated.getSelectedItem().toString(),objsearch.CBDatem.getSelectedItem().toString(),objsearch.CBDatey.getSelectedItem().toString());
@@ -42,8 +43,8 @@ public class DisplayPage extends JFrame {
         passCount = objsearch.SlidePerson.getValue(); 
         //**************************************************
         
-        CombinedFlight cf = new  CombinedFlight(source, day, month, passCount);
-        CombinedFlight filteredFlight[]=new CombinedFlight[cf.flightCount];
+        CombinedFlight cf = new  CombinedFlight(source, day, month, passCount,file1,file2);
+        filteredFlight=new CombinedFlight[cf.flightCount];
         filteredFlight=cf.combine(source, day, month, passCount);
         row=new String[cf.flightCount][9];
         
@@ -225,19 +226,22 @@ public class DisplayPage extends JFrame {
                 	selRow = TFlight.getSelectedRow();                     
                     TxtFlight.setText((String)TFlight.getModel().getValueAt(selRow, 1)); 
                     TxtTime.setText((String)TFlight.getModel().getValueAt(selRow, 6));
+                    System.out.println(selRow);
+                    
                 }
                 catch(Exception e) {
 
                 }
             }  
         });
-        if(selRow!=0)
-        ff = filteredFlight[selRow];
+        
         BConfirm.addActionListener(new CButton(this));
         search.addMouseListener(new EMouse(this,true));
     }
  public CombinedFlight getSelectedFlight()
  {
+	 if(selRow!=0)
+         ff = filteredFlight[selRow];
 	 return ff;
  }
    

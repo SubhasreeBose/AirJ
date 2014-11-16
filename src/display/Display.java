@@ -8,8 +8,8 @@ import data.CombinedFlight;
  */
 
 public interface Display {
-    public void displaySearchPage();
-    public void displayDisplayPage(CombinedFlight cf);
+    public void displaySearchPage(String file1,String file2);
+    public void displayDisplayPage(String file1,String file2);
     public void displayBookingPage(CombinedFlight cf);
     public void displayTicket();
 }

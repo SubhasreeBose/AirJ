@@ -20,6 +20,7 @@ public class SearchPage extends JFrame{
     static final int MY_MINIMUM = 0;
     final static int interval = 50;
     static final int MY_MAXIMUM = 100;
+    public String file1,file2;
     int i;
 
     JPanel Psearch=new JPanel(null);
@@ -35,8 +36,10 @@ public class SearchPage extends JFrame{
     JSlider SlidePerson;
     JCheckBox licenseBox;
    
-    public SearchPage()
+    public SearchPage(String file1,String file2)
     {
+    	this.file1=file1;
+    	this.file2=file2;
         
         //ImageIcon img = new ImageIcon("Images/images.jpg");
         //frame.setIconImage(img.getImage());
@@ -274,10 +277,13 @@ public class SearchPage extends JFrame{
         
         
         timer = new Timer(interval, new ActionListener() {
+        	String f1,f2;
             public void actionPerformed(ActionEvent evt) {
                 i++;
                 Lpbar.setVisible(true);
                 pbar.setValue(i);
+                f1=getFile1();
+                f2=getFile2();
                 if (i == 100){
                     Toolkit.getDefaultToolkit().beep();
                     timer.stop();
@@ -287,14 +293,21 @@ public class SearchPage extends JFrame{
                     Lpbar.setVisible(false);
                     i=0;
                     DisplayManager dm=new DisplayManager(objsearch);
-                    CombinedFlight cf=null;
-                    dm.displayDisplayPage(cf);
+                    
+                    dm.displayDisplayPage(f1,f2);
                     //new DisplayPage(objsearch);            
                     frame.dispose();            
                 }               
             }
         });       
     }
-    
+    public String getFile1()
+    {
+    	return file1;
+    }
+    public String getFile2()
+    {
+    	return file2;
+    }
         
 }

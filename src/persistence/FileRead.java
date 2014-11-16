@@ -20,14 +20,25 @@ public class FileRead implements Persistence {
     Flight flights[];
     int size;
     
+    public FileRead()
+    {
+    	
+    }
+    /*public FileRead(String file1,String file2)
+    {
+    	this.file1=file1;
+    	this.file2=file2;
+    	
+    }*/
     @Override
-    public Flight[] readSilkAirFile() {
+    public Flight[] readSilkAirFile(String file) {
         FileReader reader = null;
         BufferedReader br = null;
         String str; 
         int i = 0;
         try {
-           reader = new FileReader("Files/silkair.Schedule.csv");
+        	System.out.println(file);
+           reader = new FileReader("Files/"+file);
            br = new BufferedReader(reader);
         }
         catch(FileNotFoundException e) {
@@ -53,7 +64,7 @@ public class FileRead implements Persistence {
         i = 0;    
 
         try {
-            reader = new FileReader("Files/silkair.Schedule.csv");
+            reader = new FileReader("Files/"+file);
             br = new BufferedReader(reader);
             while(i<3) {
                 str = br.readLine();
@@ -152,13 +163,13 @@ public class FileRead implements Persistence {
         return flights;
     }
     
-    int silkSize() {
+    int silkSize(String file) {
         FileReader reader = null;
         BufferedReader br = null;
         String str = ""; 
         int i = 0;
         try {
-           reader = new FileReader("Files/silkair.Schedule.csv");
+           reader = new FileReader("Files/"+file);
            br = new BufferedReader(reader);
         }
         catch(FileNotFoundException e) {
@@ -178,7 +189,7 @@ public class FileRead implements Persistence {
         return i-3;
     }
     
-    public Flight[] readSpiceJetFile() {
+    public Flight[] readSpiceJetFile(String file) {
         FileReader reader = null;
         BufferedReader br = null;
         boolean b1;
@@ -187,7 +198,7 @@ public class FileRead implements Persistence {
         String str = "", temp = "";
         int i = 0;
         try {
-           reader = new FileReader("Files/spicejet.Schedule.csv");
+           reader = new FileReader("Files/"+file);
            br = new BufferedReader(reader);
         }
         catch(FileNotFoundException e) {
@@ -214,7 +225,7 @@ public class FileRead implements Persistence {
         i=0;
         
         try {
-            reader = new FileReader("Files/spicejet.Schedule.csv");
+            reader = new FileReader("Files/"+file);
             br = new BufferedReader(reader);            
             str = br.readLine();            
             str = br.readLine();

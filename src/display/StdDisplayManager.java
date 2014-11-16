@@ -25,7 +25,7 @@ public class StdDisplayManager implements Display{
     }
     
     @Override
-    public void displaySearchPage() {
+    public void displaySearchPage(String file1,String file2) {
         int flag=0;
         String choice="n";
         Scanner sc=new Scanner(System.in);
@@ -74,8 +74,8 @@ public class StdDisplayManager implements Display{
         	System.out.println("Press 'Y' to Search Flights. Press any key to continue again:");
         	choice=sc.next();        
         	if(choice.equalsIgnoreCase("y")==true) {
-        		CombinedFlight cf = new  CombinedFlight(source,d,d, passCount);
-        		displayDisplayPage(cf);
+        		CombinedFlight cf = new  CombinedFlight(source,d,d, passCount,file1,file2);
+        		displayDisplayPage(cf,file1,file2);
         	}
         	else
         		System.out.println("----------------------------------------------------------------------------------------");
@@ -83,7 +83,7 @@ public class StdDisplayManager implements Display{
     }
 
     @Override
-    public void displayDisplayPage(CombinedFlight cf) {
+    public void displayDisplayPage(CombinedFlight cf,String file1,String file2) {
         int i,ch,flag=0;
         String choice="y";
         CombinedFlight temp=null;
@@ -107,7 +107,7 @@ public class StdDisplayManager implements Display{
                 	//System.exit(0);
                 }
                 else
-                	displaySearchPage();
+                	displaySearchPage(file1,file2);
         }
             
         for(i=0;i<cf.flightCount;i++) {
@@ -160,7 +160,7 @@ public class StdDisplayManager implements Display{
         }while(choice.equalsIgnoreCase("y")==false);
         
         if(flag==1)
-            displaySearchPage();
+            displaySearchPage(file1,file2);
     }
 
     @Override
@@ -199,10 +199,10 @@ public class StdDisplayManager implements Display{
                 	System.out.println("Goodbye! Please visit us again.");
                 }
                 else
-                	displaySearchPage();             
+                	displaySearchPage(file1,file2);             
             }
             else {
-                displaySearchPage();
+                displaySearchPage(file1,file2);
             }       
     }
 
