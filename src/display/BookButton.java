@@ -5,9 +5,13 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
+import persistence.FileRead;
+
+import data.CombinedFlight;
+
 public class BookButton implements ActionListener {
     BookingPage obj;
-    
+    CombinedFlight cf;
     BookButton(BookingPage obj) {
         this.obj=obj;
     }
@@ -23,7 +27,12 @@ public class BookButton implements ActionListener {
         
         else { 
             int iChoice = JOptionPane.showConfirmDialog(null," Continue booking?");
-            if(iChoice == JOptionPane.YES_OPTION) {                
+            if(iChoice == JOptionPane.YES_OPTION) { 
+            	cf=obj.objdisplay.getSelectedFlight();
+            	FileRead fr = new FileRead();
+            	String date = obj.objsearch.CBDated.getSelectedItem().toString() + "/" + obj.objdisplay.month;
+            	System.out.println(obj.objsearch.CBDated.getSelectedItem().toString()+ " " + obj.objdisplay.passCount);
+            	fr.saveBooking(cf, date, obj.objdisplay.passCount);
                 new PrintTicket(obj);
                 //obj.Bframe.dispose();
             }

@@ -25,18 +25,21 @@ public class DisplayPage extends JFrame {
     SearchPage objsearch;
     JLabel search,LOne;
     int selRow;
+    public int month,day,passCount;
+    private CombinedFlight  ff;
+    
     
     public DisplayPage(SearchPage objsearch) {
 
         String source=objsearch.CBPlace.getSelectedItem().toString();
         ValidateDate vd=new ValidateDate(objsearch.CBDated.getSelectedItem().toString(),objsearch.CBDatem.getSelectedItem().toString(),objsearch.CBDatey.getSelectedItem().toString());
     	
-        int month = vd.checkMonth();
-        int day=vd.checkDay(Integer.parseInt(objsearch.CBDated.getSelectedItem().toString()), month);
+        month = vd.checkMonth();
+        day=vd.checkDay(Integer.parseInt(objsearch.CBDated.getSelectedItem().toString()), month);
         
         
         //**************************************************
-        int passCount = objsearch.SlidePerson.getValue(); 
+        passCount = objsearch.SlidePerson.getValue(); 
         //**************************************************
         
         CombinedFlight cf = new  CombinedFlight(source, day, month, passCount);
@@ -214,11 +217,12 @@ public class DisplayPage extends JFrame {
         frame.add(LDummy);
         frame.getContentPane().setBackground(Color.decode("#2c3e50"));
         frame.setVisible(true);
-         
+       
         TFlight.addMouseListener(new MouseAdapter() {  
             public void mouseClicked(MouseEvent evt) {  
                 try {
-                    int selRow = TFlight.getSelectedRow();  
+                	
+                	selRow = TFlight.getSelectedRow();                     
                     TxtFlight.setText((String)TFlight.getModel().getValueAt(selRow, 1)); 
                     TxtTime.setText((String)TFlight.getModel().getValueAt(selRow, 6));
                 }
@@ -227,11 +231,15 @@ public class DisplayPage extends JFrame {
                 }
             }  
         });
-    
+        if(selRow!=0)
+        ff = filteredFlight[selRow];
         BConfirm.addActionListener(new CButton(this));
         search.addMouseListener(new EMouse(this,true));
     }
-
+ public CombinedFlight getSelectedFlight()
+ {
+	 return ff;
+ }
    
     
     

@@ -15,7 +15,7 @@ class CButton implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e) {
         
-        CombinedFlight cf=null;
+        CombinedFlight cf;
         if(obj.TxtFlight.getText().equals("")) {
             JOptionPane.showMessageDialog(null,"Sorry! Please, select the field.");
         }
@@ -26,6 +26,8 @@ class CButton implements ActionListener
             
             if(iChoice == JOptionPane.YES_OPTION) {
                 DisplayManager dm=new DisplayManager(obj,obj.objsearch);
+                
+                cf=obj.getSelectedFlight();
                 dm.displayBookingPage(cf);
                 //new BookingPage(obj,obj.objsearch);
                 obj.frame.dispose();
