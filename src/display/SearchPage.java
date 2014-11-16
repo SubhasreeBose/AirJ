@@ -1,19 +1,15 @@
 package display;
+
 /**
  *
  * @author AirJ
  */
-import display.*;
-import data.*;
-import persistence.*;
-import util.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-
 import javax.swing.*;
-import javax.swing.plaf.ColorUIResource;
 
 import data.CombinedFlight;
 import util.FontAwesome;

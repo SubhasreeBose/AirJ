@@ -1,21 +1,17 @@
 package display;
+
 /**
  *
  * @author AirJ
  */
-import display.*;
-import data.*;
-import persistence.*;
-import util.*;
 
+import util.*;
 import java.awt.event.*;
 import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
-
 import javax.swing.*;
-
 import data.CombinedFlight;
 
 public class DisplayPage extends JFrame {
@@ -33,11 +29,15 @@ public class DisplayPage extends JFrame {
 
         String source=objsearch.CBPlace.getSelectedItem().toString();
         int spiceDay=check(Integer.parseInt(objsearch.CBDated.getSelectedItem().toString()));
-        int silkDay = check(Integer.parseInt(objsearch.CBDated.getSelectedItem().toString()));       
+        int silkDay = check(Integer.parseInt(objsearch.CBDated.getSelectedItem().toString()));
         
-        CombinedFlight cf = new  CombinedFlight(source,spiceDay,silkDay);
+        //**************************************************
+        int passCount = 6; //PassCount needs to be input!!
+        //**************************************************
+        
+        CombinedFlight cf = new  CombinedFlight(source, spiceDay, silkDay, passCount);
         CombinedFlight filteredFlight[]=new CombinedFlight[cf.flightCount];
-        filteredFlight=cf.combine(source,spiceDay,silkDay);
+        filteredFlight=cf.combine(source, spiceDay, silkDay, passCount);
         row=new String[cf.flightCount][9];
         
         int i;

@@ -1,109 +1,16 @@
 package display;
+
 /**
  *
  * @author AirJ
  */
-import display.*;
-import data.*;
-import persistence.*;
-import util.*;
 
+import util.*;
 import java.awt.*;
 import java.awt.event.*;
-
 import javax.swing.*;
 
-class PrintTicket extends JFrame {
-    JFrame Pframe;
-    
-    PrintTicket(BookingPage obj) {
-        Pframe=new JFrame("Ticket");
-        Pframe.setSize(300,420);
-        
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (screenSize.width - Pframe.getWidth()) / 2;
-        int y = (screenSize.height - Pframe.getHeight()) / 2;
-        Pframe.setLocation(x, y);
-        Pframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);       
-        
-        JLabel LHeading=new JLabel("<html><font size=\"3\"color=\"#B20000\">Thanks for booking with us.Happy Journey!</font></html>");
-        JLabel LName=new JLabel("<html><B><font size=\"2\"color=\"blue\">"+obj.TxtName.getText()+"</font> </B></html>");
-       
-        JButton BBook=new JButton("OK");
-        JLabel LDummy=new JLabel("<html><B> </B></html>");
-        JLabel LDate=new JLabel("<html><B><font size=\"2\"color=\"blue\">"+obj.objsearch.CBDated.getSelectedItem().toString()+" Oct 2014</font></B></html>");
-        JLabel LPerson=new JLabel("<html><B><font size=\"2\"color=\"blue\">No.of passengers :"+obj.objsearch.SlidePerson.getValue()+ "</font></B></html>");
-        JLabel LFlight1=new JLabel("<html><B><font size=\"2\"color=\"blue\">"+obj.flight1+" Flight from "+obj.objsearch.CBPlace.getSelectedItem().toString()+" to "+obj.inter+" .</font></B></html>");
-        JLabel LFlight2=new JLabel("<html><B><font size=\"2\"color=\"blue\">"+obj.flight2+" Flight from "+obj.inter+" to SINGAPORE .</font></B></html>");
-        JLabel LTime=new JLabel("<html><B><font size=\"2\"color=\"blue\">Time</font></B></html>");
-        JTextField TxtName=new JTextField();        
-        
-        LFlight1.setBounds(30,200,250,30);
-        LHeading.setBounds(20,10,250,30);
-        LFlight2.setBounds(30,240,250,30);
-        LTime.setBounds(30,160,70,30);
-        BBook.setBounds(105,300,80,30);
-        TxtName.setBounds(130, 50, 100, 30);
-        LDate.setBounds(30, 90, 240, 30);
-        LName.setBounds(30, 50, 240, 30);
-        LPerson.setBounds(30, 120, 100, 30);      
-        
-        Pframe.add(LHeading);
-        Pframe.add(LTime);
-        Pframe.add(LName);
-        Pframe.add(BBook);
-        Pframe.add(LFlight1);
-        Pframe.add(LFlight2);
-        Pframe.add(LDate);
-        Pframe.add(LPerson);    
-        Pframe.add(LDummy);
-        Pframe.setVisible(true);
-        
-        BBook.addActionListener(new ActionListener() {
-           @Override
-            public void actionPerformed(ActionEvent e) {
-               JOptionPane.showMessageDialog(null, "Thank You!\nYour booking has been confirmed.\nHave a safe journey.");
-               Pframe.dispose();
-               
-           } 
-           
-        });
-    }
-}
-
-class BookButton implements ActionListener {
-    BookingPage obj;
-    
-    BookButton(BookingPage obj) {
-        this.obj=obj;
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if(obj.TxtName.getText().equals(""))
-           JOptionPane.showMessageDialog(null,"Sorry! Please, fill up the fields.");
-        else if(obj.Txtemail.getText().contains("@")==false)
-        {
-            JOptionPane.showMessageDialog(null,"Please,Enter a valid Email id.");
-        }
-        else if(!obj.licenseBox.isSelected())
-        {
-            JOptionPane.showMessageDialog(null, " You need to accept to proceed further!");
-        }
-        else { 
-            int iChoice = JOptionPane.showConfirmDialog(null," Continue booking?");
-            if(iChoice == JOptionPane.YES_OPTION) {
-                
-                new PrintTicket(obj);
-                //obj.Bframe.dispose();
-            }
-            else {
-            }
-        }
-    }
-}
-
-public class BookingPage extends JFrame{
+public class BookingPage extends JFrame {
     JFrame Bframe;
     JLabel search,display;
     JButton BBook;
@@ -113,8 +20,7 @@ public class BookingPage extends JFrame{
     JCheckBox licenseBox;
     String flight1,flight2,inter;
     
-    BookingPage(DisplayPage objdisplay,SearchPage objsearch)
-    {
+    BookingPage(DisplayPage objdisplay,SearchPage objsearch) {
         this.objdisplay=objdisplay;
         this.objsearch=objsearch;
         
@@ -127,15 +33,12 @@ public class BookingPage extends JFrame{
         Bframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
        
         FontAwesome f=new FontAwesome();
-        
                 
         Icon img1 = new ImageIcon("Images/logo-without-bg.png");
         JLabel LLogo = new JLabel("<html><i><font face=\"verdana\" size=\"3\" color=\"white\">The smarter,easier and faster way to book flights.</font></i></html>", img1, SwingConstants.LEFT);
         LLogo.setBounds(0, 0, 700,70);
    
-        Icon imgedit=new ImageIcon("Images/Edit.gif");
-        
-           
+        Icon imgedit=new ImageIcon("Images/Edit.gif");        
         
         JLabel LName=new JLabel("<html><B> Name: </B></html>");
         LName.setForeground(Color.white);
@@ -202,10 +105,7 @@ public class BookingPage extends JFrame{
         
         JLabel LDummy=new JLabel("<html><B> </B></html>");   
         JLabel selection=new JLabel("Your selection ");
-        selection.setForeground(Color.white);
-        
-         
-        
+        selection.setForeground(Color.white);        
         selection.setBounds(50,180,170,50);
          
         Limglogo1.setBounds(50,240,50,50);
@@ -266,8 +166,6 @@ public class BookingPage extends JFrame{
         display.setBounds(300, 140, 150, 30);
         book.setBounds(530, 140, 150, 30);
         
-      
-        
         Lline1.setBounds(90,110,200,20);
         Lline2.setBounds(340,110,200,20);
         
@@ -315,4 +213,3 @@ public class BookingPage extends JFrame{
         display.addMouseListener(new EDMouse(this,true));         
     }    
 }
-

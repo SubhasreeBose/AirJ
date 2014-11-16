@@ -1,10 +1,6 @@
 package data;
-import persistence.SilkAirSchedule;
-import display.*;
-import data.*;
+
 import persistence.*;
-import util.*;
-import persistence.SpiceJetSchedule;
 
 /**
  *
@@ -16,7 +12,7 @@ public class CombinedFlight {
     private String deptSilk,arrSilk,arrSpice,deptSpice,intermediate,totalTime,via,spiceFlightNo,silkFlightNo;
     final int ADDED_TIME = 150;
     
-    public CombinedFlight(String source,int spiceDay,int silkDay) {
+    public CombinedFlight(String source,int spiceDay,int silkDay, int passCount) {
         int i,j;
         deptSilk="";
         arrSilk="";
@@ -27,8 +23,12 @@ public class CombinedFlight {
         via="";
         spiceFlightNo="";
         silkFlightNo="";
+        //String date = spiceDay +"/";
         SilkAirSchedule silkAir = new SilkAirSchedule();
+        silkAir.getBookedFilghts("4/11", passCount);
         SpiceJetSchedule spiceJet = new SpiceJetSchedule();
+        spiceJet.getBookedFilghts("4/11", passCount);
+        
         for(i=0;i<spiceJet.size;i++) {
             if(spiceJet.flights[i].getSource().compareTo(source) == 0 && spiceJet.flights[i].getFrequency(spiceDay)) { 
                 for(j=0;j<silkAir.size;j++) { 
@@ -51,8 +51,6 @@ public class CombinedFlight {
                 }			   
             }
         }
-          
-      
     }
     
      public void setSilkFlightNo(String flightNo){
@@ -82,42 +80,45 @@ public class CombinedFlight {
     public void setArrSpice(String arr_time){
         this.arrSpice= arr_time;
     }
-    public String getSilkFlightNo(){
+    public String getSilkFlightNo() {
         return(silkFlightNo);
     }
-     public String getSpiceFlightNo(){
+     public String getSpiceFlightNo() {
         return(spiceFlightNo);
     }
-    public String getIntermediate(){
+    public String getIntermediate() {
         return(intermediate);
     }
-    public String getDuration(){//dekte clkean lage :-p tor choice karap sobai jane
+    public String getDuration() {
         return(totalTime);
     }
-    public String getVia(){
+    public String getVia() {
         return(via );
     }
-    public String getDeptSilk(){
+    public String getDeptSilk() {
         return(deptSilk);
     }
-    public String getArrSilk(){
+    public String getArrSilk() {
         return(arrSilk);
     }
-     public String getDeptSpice(){
+     public String getDeptSpice() {
         return(deptSpice) ;
     }
-    public String getArrSpice(){
+    public String getArrSpice() {
        return(arrSpice);
     }
     
-    public CombinedFlight[] combine(String source,int spiceDay,int silkDay) {
+    public CombinedFlight[] combine(String source,int spiceDay,int silkDay, int passCount) {
         int i,j,totalTime,Count=0;
         SilkAirSchedule silkAir = new SilkAirSchedule();
+        silkAir.getBookedFilghts("4/11", passCount);
         SpiceJetSchedule spiceJet = new SpiceJetSchedule();
+        spiceJet.getBookedFilghts("4/11", passCount);
+        
         int duration[]=new int[flightCount];
         CombinedFlight cf[]=new CombinedFlight[flightCount];
         for(i=0;i<flightCount;i++)
-            cf[i]=new CombinedFlight(source,spiceDay,silkDay);
+            cf[i]=new CombinedFlight(source,spiceDay,silkDay, passCount);
         
         for(i=0;i<spiceJet.size;i++) {
             if(spiceJet.flights[i].getSource().compareTo(source) == 0 && spiceJet.flights[i].getFrequency(spiceDay)) { 

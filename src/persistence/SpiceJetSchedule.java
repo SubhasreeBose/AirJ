@@ -3,13 +3,9 @@ package persistence;
  *
  * @author AirJ
  */
-import display.*;
-import data.*;
-import persistence.*;
-import util.*;
 import java.util.*;
 
-import data.Flight;
+import data.*;
 
 public class SpiceJetSchedule extends Flight {
     
@@ -20,6 +16,12 @@ public class SpiceJetSchedule extends Flight {
         FileRead fr = new FileRead();
         flights = fr.readSpiceJetFile();
         size = fr.spiceSize();
+    }
+    
+    public void getBookedFilghts(String date, int passCount) {
+    	FileRead fr = new FileRead();
+    	flights = fr.readBooking(flights, size, date, passCount);
+    	size = fr.size;
     }
     
     public int getHr(int i, int j) {

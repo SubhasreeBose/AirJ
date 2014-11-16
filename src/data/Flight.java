@@ -1,8 +1,5 @@
 package data;
-import display.*;
-import data.*;
-import persistence.*;
-import util.*;
+
 public class Flight {
     private String flight_no;
     private String source;
@@ -20,7 +17,7 @@ public class Flight {
         via = "";
         dep_time = "";
         arr_time = "";
-        freq = new boolean[8];//why??
+        freq = new boolean[8];
         capacity = 0;
     }
     
@@ -46,10 +43,6 @@ public class Flight {
     }
     public void setFrequency(int i,boolean check) {
     	freq[i]=check;	
-    }
-    public void setCapacity(int capacity) {
-    	if(!isFull())
-    		this.capacity += capacity;    	
     }
     
     //Setter Methods
@@ -83,12 +76,5 @@ public class Flight {
     	if(via.compareTo("DIRECT ") != 0)
     		return true;
     	return false;
-    }
-    
-    public boolean isFull() {
-    	if(capacity >= 15)
-    		return true;
-    	return false;
-    
     }
 }

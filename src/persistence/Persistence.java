@@ -1,9 +1,6 @@
 package persistence;
-import data.Flight;
-import display.*;
+
 import data.*;
-import persistence.*;
-import util.*;
 /**
  *
  * @author AirJ
@@ -12,6 +9,6 @@ import util.*;
 public interface Persistence {
     public Flight[] readSilkAirFile();
     public Flight[] readSpiceJetFile();
-    public void readBooking();
-    public void saveBooking();
+    public Flight[] readBooking(Flight[] flights, int size, String date, int passCount);
+    public void saveBooking(CombinedFlight cf, String date, int passCount);
 }

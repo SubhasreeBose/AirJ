@@ -3,23 +3,23 @@ package persistence;
  *
  * @author AirJ
  */
-import display.*;
+
 import data.*;
-import persistence.*;
-import util.*;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.StringTokenizer;
-
-import data.Flight;
 
 public class FileRead implements Persistence {
     
     Flight flights[];
     int size;
     
+    @Override
     public Flight[] readSilkAirFile() {
         FileReader reader = null;
         BufferedReader br = null;
@@ -69,7 +69,7 @@ public class FileRead implements Persistence {
                 strPart3 = data.nextToken();
                 if(strPart1 != null) {
                     StringTokenizer dataPart = new StringTokenizer(strPart1, ",");
-                   flights[i].setSource(dataPart.nextToken().trim());
+                    flights[i].setSource(dataPart.nextToken().trim());
                 }
                 String tmp = "";
                 if(strPart2 != null){
@@ -103,7 +103,6 @@ public class FileRead implements Persistence {
                     flights[i].setDepTime(dataPart4.nextToken());
                     flights[i].setArrTime(dataPart4.nextToken());
                 }
-
                 i++;
                 strPart1 = null;
                 strPart2 = null;
@@ -125,6 +124,7 @@ public class FileRead implements Persistence {
                }
            }
         }
+        
         return flights;
     }
     
@@ -275,6 +275,7 @@ public class FileRead implements Persistence {
                         size--;
                     }
                 }
+                //flights[i].setCapacity(15);
                 i++;
                 strPart1 = null;
                 strPart2 = null;
@@ -303,11 +304,114 @@ public class FileRead implements Persistence {
         return size;
     }
     
-    public void readBooking() {
+    @Override
+    public Flight[] readBooking(Flight[] flights, int size, String date, int passCount) {
+        FileReader reader = null;
+        BufferedReader br = null;
+        String str, strPart1, strPart2, strPart3;
+        int i, cap;
+        ArrayList<Flight> newFlights = new ArrayList<Flight>();
+        for(i=0; i<size; i++)
+            newFlights.add(flights[i]);
+        try {
+            File f = new File("Files/book.csv");
+            if(!f.exists()){
+                f.createNewFile();
+            System.out.println("File Created!");
+            }
+            else {
+            	for(i=0; i<size; i++) {
+            		reader = new FileReader(f);
+            		br = new BufferedReader(reader);
+            		str = br.readLine();
+            		while(str != null) {
+            			StringTokenizer data1 = new StringTokenizer(str, ",");
+            			strPart1 = data1.nextToken();
+            			if(strPart1.compareTo(flights[i].getFlightNo()) == 0){
+            				strPart2 = data1.nextToken();
+            				if(strPart2.compareTo(date) == 0) {
+            					strPart3 = data1.nextToken();
+            					cap = Integer.parseInt(strPart3);
+            					if(passCount > cap){
+            						newFlights.remove(i);
+            					}
+            				}
+            			}
+            			str = br.readLine();
+            		}
+            	}
+            }
+            try {
+    			br.close();
+    		} catch (IOException e) {
+    			e.printStackTrace();
+    		}
+        }
+        catch(Exception e){
+        	
+        }
         
+        if(!newFlights.isEmpty()) {
+            this.size = newFlights.size();
+            for(i=0; i<this.size; i++)
+                flights[i] = newFlights.get(i);
+        }
+        return flights;
     }
     
-    public void saveBooking() {
-        
+    public void saveBooking(CombinedFlight cf, String date, int passCount) {
+        FileReader reader = null;
+        BufferedReader br = null;
+        FileWriter fw;
+        File file = new File("Files/book.csv");
+        String str, strPart1, strPart2, strPart3, newFile="";
+        int cap; boolean flagSpice = false, flagSilk = false;
+        try{
+            reader = new FileReader(file);
+            br = new BufferedReader(reader);
+            str = br.readLine();
+            if(str!=null){
+                while(str != null) {
+                    newFile += str + "\r\n";
+                    StringTokenizer data1 = new StringTokenizer(str,",");
+                    strPart1 = data1.nextToken();
+                    if(strPart1.compareTo(cf.getSpiceFlightNo()) == 0){
+                        strPart2 = data1.nextToken();
+                        if(strPart2.compareTo(date) == 0){    ////check flight of that day
+                            strPart3 = data1.nextToken();
+                            cap = Integer.parseInt(strPart3);
+                            newFile = newFile.replace((strPart1+","+strPart2+","+strPart3), (strPart1+","+strPart2+","+Integer.toString(cap-passCount)));
+                            flagSpice = true;
+                        }
+                    }
+                    
+                    if(strPart1.compareTo(cf.getSilkFlightNo()) == 0){
+                        strPart2 = data1.nextToken();
+                        if(strPart2.compareTo(date) == 0) {
+                            strPart3 = data1.nextToken();
+                            cap = Integer.parseInt(strPart3);
+                            newFile = newFile.replace((strPart1+","+strPart2+","+strPart3), (strPart1+","+strPart2+","+Integer.toString(cap-passCount)));
+                            flagSilk = true;
+                        }
+                    }
+                    str = br.readLine();
+                }
+            }
+            else {
+                newFile += cf.getSpiceFlightNo() + "," + date + "," + (15-passCount) + "\r\n";
+                newFile += cf.getSilkFlightNo() + "," + date + "," + (15-passCount) + "\r\n";
+                flagSpice = true; flagSilk = true;
+            }
+            if (!flagSpice)
+                newFile += cf.getSpiceFlightNo() + "," + date + "," + (15-passCount) + "\r\n";
+            if(!flagSilk)
+                newFile += cf.getSilkFlightNo() + "," + date + "," + (15-passCount) + "\r\n";
+            fw = new FileWriter(file);
+            fw.write(newFile);
+            fw.close();
+        }
+        catch(Exception e){
+            
+        }
     }
 }

@@ -1,8 +1,5 @@
 package display;
-import display.*;
-import data.*;
-import persistence.*;
-import util.*;
+
 import java.awt.*;
 import java.awt.event.*;
 

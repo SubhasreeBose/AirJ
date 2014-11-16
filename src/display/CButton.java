@@ -1,12 +1,7 @@
 package display;
-import display.*;
-import data.*;
-import persistence.*;
-import util.*;
+
 import java.awt.event.*;
-
 import javax.swing.*;
-
 import data.CombinedFlight;
 
 class CButton implements ActionListener

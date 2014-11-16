@@ -1,26 +1,28 @@
 package persistence;
-import data.Flight;
-import display.*;
+
 import data.*;
-import persistence.*;
-import util.*;
 /**
  *
  * @author AirJ
  */
     
 public class SilkAirSchedule extends Flight {
-   
+	   
     public Flight flights[];
     public int size;
 
     public SilkAirSchedule() {
         FileRead fr = new FileRead();
         size = fr.silkSize();
-        flights = fr.readSilkAirFile();
+        flights = fr.readSilkAirFile();       
     }
-   
-        
+    
+    public void getBookedFilghts(String date, int passCount) {
+    	FileRead fr = new FileRead();
+    	flights = fr.readBooking(flights, size, date, passCount);
+    	size = fr.size;
+    }
+    
     public int getHr(int i, int j) {
         if(j == 0) {
             String depart = flights[i].getDepTime();

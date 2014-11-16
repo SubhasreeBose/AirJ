@@ -1,20 +1,7 @@
 package util;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.EventQueue;
-import java.awt.Font;
-import java.awt.FontFormatException;
-import java.awt.GridBagLayout;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
+import java.awt.*;
+import javax.swing.*;
 
 public class TestFontAwsome {
 
