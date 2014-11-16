@@ -13,6 +13,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.swing.*;
 
+import persistence.FileRead;
+
 import data.CombinedFlight;
 
 public class DisplayPage extends JFrame {
@@ -38,7 +40,7 @@ public class DisplayPage extends JFrame {
         month = vd.checkMonth();
         day=vd.checkDay(Integer.parseInt(objsearch.CBDated.getSelectedItem().toString()), month);
         
-        
+        String date=objsearch.CBDated.getSelectedItem().toString() +"/" + month ; // edited
         //**************************************************
         passCount = objsearch.SlidePerson.getValue(); 
         //**************************************************
@@ -46,6 +48,8 @@ public class DisplayPage extends JFrame {
         CombinedFlight cf = new  CombinedFlight(source, day, month, passCount,file1,file2);
         filteredFlight=new CombinedFlight[cf.flightCount];
         filteredFlight=cf.combine(source, day, month, passCount);
+        FileRead fr=new FileRead();
+        //filteredFlight=fr.readBooking(filteredFlight,cf.flightCount,date,passCount);
         row=new String[cf.flightCount][9];
         
         int i;

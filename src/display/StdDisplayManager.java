@@ -6,6 +6,8 @@ import java.util.GregorianCalendar;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import util.ValidateDate;
+
 import data.CombinedFlight;
 
 /**
@@ -16,8 +18,8 @@ import data.CombinedFlight;
 public class StdDisplayManager implements Display{
 
     String source,file1,file2;
-    int passenger,day;
-    int d;
+    int passenger,d,mon;
+    String day,m,y;
     
     public StdDisplayManager(String file1,String file2) {
         this.file1=file1;
@@ -26,7 +28,7 @@ public class StdDisplayManager implements Display{
     
     @Override
     public void displaySearchPage(String file1,String file2) {
-        int flag=0;
+        int flag=0,val=0;
         String choice="n";
         Scanner sc=new Scanner(System.in);
         System.out.println("\t\tAirJ  The simpler,smarter and easier way of booking flights.\n");
@@ -39,7 +41,7 @@ public class StdDisplayManager implements Display{
         	source=source.toUpperCase();
         	
         	//***********************************************
-        	int passCount = 6; //PassCount needs to be input
+        	 //PassCount needs to be input
         	//***********************************************
         	
         	if (source.equalsIgnoreCase("DELHI")==false && source.equalsIgnoreCase("MUMBAI")==false && source.equalsIgnoreCase("PUNE")==false) {
@@ -55,13 +57,25 @@ public class StdDisplayManager implements Display{
         			continue;
         		}        
         		System.out.println("Enter day:");
-        		day=sc.nextInt();        
-        		if(day<=0 || day>31) {                
+        		day=sc.next();
+        		System.out.println("Enter month:");
+        		m=sc.next();
+        		System.out.println("Enter year:");
+        		y=sc.next();
+        		ValidateDate vd=new ValidateDate(day,m,y);
+        		val=vd.validateDate();
+        		mon=vd.checkMonth();
+        		if(val==1)
+        			d=vd.checkDay(Integer.parseInt(day),mon); 
+        		else
+        		 {                
         			System.out.println("Invalid input."); 
         			continue;
+        			
         		}
-        		else
-        			d=check(day);       
+        		
+        			
+        		  
         	}
         	catch(InputMismatchException exception) {                      
                       System.out.println("This is not an integer");
@@ -69,13 +83,13 @@ public class StdDisplayManager implements Display{
             }        
         	System.out.println("You have entered: ");
         	System.out.println("Source City: " + source);
-        	System.out.println("Date: " + day + "/10/2014");
+        	System.out.println("Date: " + day + "/"+ m+"/"+y);
         	System.out.println("No of tickets: " + passenger);
         	System.out.println("Press 'Y' to Search Flights. Press any key to continue again:");
         	choice=sc.next();        
         	if(choice.equalsIgnoreCase("y")==true) {
-        		CombinedFlight cf = new  CombinedFlight(source,d,d, passCount,file1,file2);
-        		displayDisplayPage(cf,file1,file2);
+        		
+        		displayDisplayPage(file1,file2);
         	}
         	else
         		System.out.println("----------------------------------------------------------------------------------------");
@@ -83,18 +97,18 @@ public class StdDisplayManager implements Display{
     }
 
     @Override
-    public void displayDisplayPage(CombinedFlight cf,String file1,String file2) {
+    public void displayDisplayPage(String file1,String file2) {
         int i,ch,flag=0;
         String choice="y";
         CombinedFlight temp=null;
         Scanner sc = new Scanner(System.in);
         
         //***********************************************
-    	int passCount = 6; //PassCount needs to be input
+    	 //PassCount needs to be input
     	//***********************************************
-    	
+    	CombinedFlight cf = new  CombinedFlight(source,d,mon, passenger,file1,file2);
         CombinedFlight filteredFlight[]=new CombinedFlight[cf.flightCount];
-        filteredFlight=cf.combine(source,d,d, passCount);
+        filteredFlight=cf.combine(source,d,mon, passenger);
         System.out.println("\n\nShowing available flights...");
         System.out.println("===========================================================================================");
         System.out.println("Total number of available flights: " + cf.flightCount);
@@ -211,7 +225,7 @@ public class StdDisplayManager implements Display{
         
     }
     
-    public static int check(int dd) {
+    /*public static int check(int dd) {
         Date date = (new GregorianCalendar(2014, 9, dd)).getTime();
         SimpleDateFormat f = new SimpleDateFormat("EEEE");
         String d = f.format(date);
@@ -229,5 +243,5 @@ public class StdDisplayManager implements Display{
             return 5;
         else
             return 6;
-    }
+    }*/
 }

@@ -37,7 +37,7 @@ public class FileRead implements Persistence {
         String str; 
         int i = 0;
         try {
-        	System.out.println(file);
+        	
            reader = new FileReader("Files/"+file);
            br = new BufferedReader(reader);
         }
