@@ -1,10 +1,15 @@
+package display;
 /**
  *
  * @author AirJ
  */
-
+import display.*;
+import data.*;
+import persistence.*;
+import util.*;
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
 
 class PrintTicket extends JFrame {

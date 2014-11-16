@@ -1,3 +1,9 @@
+package persistence;
+import data.Flight;
+import display.*;
+import data.*;
+import persistence.*;
+import util.*;
 /**
  *
  * @author AirJ
@@ -5,8 +11,8 @@
     
 public class SilkAirSchedule extends Flight {
    
-    Flight flights[];
-    int size;
+    public Flight flights[];
+    public int size;
 
     public SilkAirSchedule() {
         FileRead fr = new FileRead();

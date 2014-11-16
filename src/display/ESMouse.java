@@ -1,4 +1,8 @@
-
+package display;
+import display.*;
+import data.*;
+import persistence.*;
+import util.*;
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;

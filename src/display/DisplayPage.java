@@ -1,14 +1,21 @@
+package display;
 /**
  *
  * @author AirJ
  */
-
+import display.*;
+import data.*;
+import persistence.*;
+import util.*;
 import java.awt.event.*;
 import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
+
 import javax.swing.*;
+
+import data.CombinedFlight;
 
 public class DisplayPage extends JFrame {
     

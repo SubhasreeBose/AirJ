@@ -1,14 +1,22 @@
+package data;
+import persistence.SilkAirSchedule;
+import display.*;
+import data.*;
+import persistence.*;
+import util.*;
+import persistence.SpiceJetSchedule;
+
 /**
  *
  * @author AirJ
  */
 
 public class CombinedFlight {
-    int flightCount;
+    public int flightCount;
     private String deptSilk,arrSilk,arrSpice,deptSpice,intermediate,totalTime,via,spiceFlightNo,silkFlightNo;
     final int ADDED_TIME = 150;
     
-    CombinedFlight(String source,int spiceDay,int silkDay) {
+    public CombinedFlight(String source,int spiceDay,int silkDay) {
         int i,j;
         deptSilk="";
         arrSilk="";
