@@ -24,6 +24,7 @@ public class CombinedFlight {
         spiceFlightNo="";
         silkFlightNo="";
         //String date = spiceDay +"/";
+        
         SilkAirSchedule silkAir = new SilkAirSchedule();
         silkAir.getBookedFilghts("4/11", passCount);
         SpiceJetSchedule spiceJet = new SpiceJetSchedule();
@@ -43,11 +44,19 @@ public class CombinedFlight {
                     int arrTimeMin = spiceJet.getMin(i,1);
                     if(spiceDest.compareTo(silkSource.substring(0,silkSource.lastIndexOf("(")-1).toUpperCase().trim())==0 ) { 
                         if(silkAir.flights[j].getFrequency(silkDay)) {
-                            int time = timediff(arrTimeHr, arrTimeMin, depTimeHr, depTimeMin); 
+                        	int time = timediff(arrTimeHr, arrTimeMin, depTimeHr, depTimeMin, false); 
                             if(time >= 120 && time <= 360)
                                 flightCount++;
                         }
                     }
+                    /*
+                     * The following else-if part is to check
+                     * if the flight MI 475 which departs at 00:45
+                     * is available or not.
+                     */
+                    if(silkAir.flights[j].getFrequency((silkDay+1)%7))
+                    	if(silkAir.getHr(j,  0) < 6)
+                    		flightCount++;
                 }			   
             }
         }
@@ -135,7 +144,7 @@ public class CombinedFlight {
                     
                     if(spiceDest.compareTo(silkSource.substring(0,silkSource.lastIndexOf("(")-1).toUpperCase().trim())==0 ) { 
                         if(silkAir.flights[j].getFrequency(silkDay)) {
-                            int time = timediff(arrTimeHr, arrTimeMin, depTimeHr, depTimeMin); 
+                        	int time = timediff(arrTimeHr, arrTimeMin, depTimeHr, depTimeMin, false); 
                             if(time >= 120 && time <= 360) {
                                 cf[Count].setDeptSpice(spiceJet.flights[i].getDepTime());
                                 cf[Count].setSpiceFlightNo(spiceJet.flights[i].getFlightNo());
@@ -151,13 +160,41 @@ public class CombinedFlight {
                                 cf[Count].setArrSilk(convert(silkAir.flights[j].getArrTime()));
                                
                                 
-                                
-                                totalTime = timediff(spiceJet.getHr(i, 0), spiceJet.getMin(i, 0), silkAir.getHr(j, 1), silkAir.getMin(j, 1)) - ADDED_TIME;
+                                totalTime = timediff(spiceJet.getHr(i, 0), spiceJet.getMin(i, 0), silkAir.getHr(j, 1), silkAir.getMin(j, 1), ((spiceJet.getHr(i, 0) < silkAir.getHr(j, 0)) ? true:false)) - ADDED_TIME;                                
                                 duration[Count]=totalTime;
                                 cf[Count].setDuration(Integer.toString(totalTime/60)+"hrs "+Integer.toString(totalTime%60)+ "mins");
-                                Count++;
-                               
+                                Count++;                               
                             }
+                        }
+                        
+                        /*
+                         * The following else-if part is to check
+                         * if the flight MI 475 which departs at 00:45
+                         * is available or not.
+                         */
+                        if(silkAir.flights[j].getFrequency((silkDay+1)%7)) {
+                        	if(silkAir.getHr(j,  0) < 6) {
+                        		int time = timediff(arrTimeHr, arrTimeMin, depTimeHr, depTimeMin, true); 
+                                if(time >= 120 && time <= 360) {                            
+                                    cf[Count].setDeptSpice(spiceJet.flights[i].getDepTime());
+                                    cf[Count].setSpiceFlightNo(spiceJet.flights[i].getFlightNo());
+                                    cf[Count].setArrSpice(spiceJet.flights[i].getArrTime());
+                                    cf[Count].setIntermediate(spiceDest);
+                                    if(spiceJet.flights[i].isHopping())
+                                        cf[Count].setVia(spiceJet.flights[i].getVia());
+                                    else
+                                        cf[Count].setVia("Direct");
+                                    
+                                    cf[Count].setDeptSilk(convert(silkAir.flights[j].getDepTime()));
+                                    cf[Count].setSilkFlightNo(silkAir.flights[j].getFlightNo());
+                                    cf[Count].setArrSilk(convert(silkAir.flights[j].getArrTime()));
+                                    
+                                    totalTime = timediff(spiceJet.getHr(i, 0), spiceJet.getMin(i, 0), silkAir.getHr(j, 1), silkAir.getMin(j, 1), true);
+                                    duration[Count]=totalTime;
+                                    cf[Count].setDuration(Integer.toString(totalTime/60)+"hrs "+Integer.toString(totalTime%60)+ "mins");
+                                    Count++;                             
+                                }
+                        	}
                         }
                     }
                 }			   
@@ -167,9 +204,9 @@ public class CombinedFlight {
         return cf;
     }
     
-    public static int timediff(int start_hr, int start_min, int end_hr, int end_min) {
+    public static int timediff(int start_hr, int start_min, int end_hr, int end_min, boolean flag) {
         int diff;
-        if(end_hr<start_hr)
+        if(flag)
             diff=((end_hr+24)-start_hr)*60;
         else
             diff=(end_hr-start_hr)*60;

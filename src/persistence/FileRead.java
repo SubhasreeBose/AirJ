@@ -5,6 +5,7 @@ package persistence;
  */
 
 import data.*;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -26,7 +27,7 @@ public class FileRead implements Persistence {
         String str; 
         int i = 0;
         try {
-           reader = new FileReader("Files/silkair.Schedule.csv");
+           reader = new FileReader("Files/silkair.Schedule1.csv");
            br = new BufferedReader(reader);
         }
         catch(FileNotFoundException e) {
@@ -52,7 +53,7 @@ public class FileRead implements Persistence {
         i = 0;    
 
         try {
-            reader = new FileReader("Files/silkair.Schedule.csv");
+            reader = new FileReader("Files/silkair.Schedule1.csv");
             br = new BufferedReader(reader);
             while(i<3) {
                 str = br.readLine();
@@ -61,49 +62,72 @@ public class FileRead implements Persistence {
 
             str = br.readLine();
             i=0;
-            String strPart1 = "", strPart2 = "", strPart3 = "";
+            String strPart1 = "", strPart2 = "", strPart3 = "", strPart4 = "";
             while(str != null) {
-                StringTokenizer data = new StringTokenizer(str,"\"");
-                strPart1 = data.nextToken();
-                strPart2 = data.nextToken();
-                strPart3 = data.nextToken();
-                if(strPart1 != null) {
-                    StringTokenizer dataPart = new StringTokenizer(strPart1, ",");
-                    flights[i].setSource(dataPart.nextToken().trim());
-                }
-                String tmp = "";
-                if(strPart2 != null){
-                    StringTokenizer dataPart = new StringTokenizer(strPart2, ",");
-                    int j = dataPart.countTokens();
-                    while(--j >= 0) {
-                        tmp = dataPart.nextToken();
-                        if(tmp.compareTo("Sun") == 0) {
-                            flights[i].setFrequency(0,true);
-                            flights[i].setFrequency(7,true);
-                        }
-                        else if(tmp.compareTo("Mon") == 0)
-                            flights[i].setFrequency(1,true); 
-                        else if(tmp.compareTo("Tue") == 0)
-                            flights[i].setFrequency(2,true);
-                        else if(tmp.compareTo("Wed") == 0)
-                            flights[i].setFrequency(3,true);
-                        else if(tmp.compareTo("Thu") == 0)
-                            flights[i].setFrequency(4,true);
-                        else if(tmp.compareTo("Fri") == 0)
-                            flights[i].setFrequency(5,true);
-                        else if(tmp.compareTo("Sat") == 0)
-                            flights[i].setFrequency(6,true);
-                    }
-                }
-                if(strPart3 != null) {
-                    StringTokenizer dataPart3 = new StringTokenizer(strPart3, ",");
-                    flights[i].setFlightNo(dataPart3.nextToken());
-                    String strPart4 = dataPart3.nextToken();
-                    StringTokenizer dataPart4 = new StringTokenizer(strPart4, "/");
-                    flights[i].setDepTime(dataPart4.nextToken());
-                    flights[i].setArrTime(dataPart4.nextToken());
-                }
-                i++;
+            	if(str.contains("\"")) {
+	            	StringTokenizer data = new StringTokenizer(str,"\"");
+	                strPart1 = data.nextToken();
+	                strPart2 = data.nextToken();
+	                strPart3 = data.nextToken();
+	                if(strPart1 != null) {
+	                    StringTokenizer dataPart = new StringTokenizer(strPart1, ",");
+	                    flights[i].setSource(dataPart.nextToken().trim());
+	                }
+	                String tmp = "";
+	                if(strPart2 != null){
+	                    StringTokenizer dataPart = new StringTokenizer(strPart2, ",");
+	                    int j = dataPart.countTokens();
+	                    while(--j >= 0) {
+	                        tmp = dataPart.nextToken();
+	                        if(tmp.compareTo("Sun") == 0) {
+	                            flights[i].setFrequency(0,true);
+	                            flights[i].setFrequency(7,true);
+	                        }
+	                        else if(tmp.compareTo("Mon") == 0)
+	                            flights[i].setFrequency(1,true); 
+	                        else if(tmp.compareTo("Tue") == 0)
+	                            flights[i].setFrequency(2,true);
+	                        else if(tmp.compareTo("Wed") == 0)
+	                            flights[i].setFrequency(3,true);
+	                        else if(tmp.compareTo("Thu") == 0)
+	                            flights[i].setFrequency(4,true);
+	                        else if(tmp.compareTo("Fri") == 0)
+	                            flights[i].setFrequency(5,true);
+	                        else if(tmp.compareTo("Sat") == 0)
+	                            flights[i].setFrequency(6,true);
+	                    }
+	                }
+	                if(strPart3 != null) {
+	                    StringTokenizer dataPart3 = new StringTokenizer(strPart3, ",");
+	                    flights[i].setFlightNo(dataPart3.nextToken());
+	                    strPart4 = dataPart3.nextToken();
+	                    StringTokenizer dataPart4 = new StringTokenizer(strPart4, "/");
+	                    flights[i].setDepTime(dataPart4.nextToken());
+	                    flights[i].setArrTime(dataPart4.nextToken());
+	                }	                
+	            }
+            	else {
+            		StringTokenizer data = new StringTokenizer(str,",");
+	                strPart1 = data.nextToken();
+	                if(strPart1 != null) {
+	                    flights[i].setSource(strPart1.trim());
+	                }
+	                strPart2 = data.nextToken();
+	                if(strPart2 != null){
+	                	flights[i].setFrequency(0,true);
+                        flights[i].setFrequency(7,true);
+	                }
+	                strPart3 = data.nextToken();
+	                flights[i].setFlightNo(strPart3.trim());
+	                
+	                strPart4 = data.nextToken();
+	                if(strPart4 != null) {	                    
+	                    StringTokenizer dataPart4 = new StringTokenizer(strPart4, "/");
+	                    flights[i].setDepTime(dataPart4.nextToken());
+	                    flights[i].setArrTime(dataPart4.nextToken());
+	                }	                
+            	}
+            	i++;
                 strPart1 = null;
                 strPart2 = null;
                 strPart3 = null;
@@ -134,7 +158,7 @@ public class FileRead implements Persistence {
         String str = ""; 
         int i = 0;
         try {
-           reader = new FileReader("Files/silkair.Schedule.csv");
+           reader = new FileReader("Files/silkair.Schedule1.csv");
            br = new BufferedReader(reader);
         }
         catch(FileNotFoundException e) {
@@ -163,7 +187,7 @@ public class FileRead implements Persistence {
         String str = "", temp = "";
         int i = 0;
         try {
-           reader = new FileReader("Files/spicejet.Schedule.csv");
+           reader = new FileReader("Files/spicejet.Schedule1.csv");
            br = new BufferedReader(reader);
         }
         catch(FileNotFoundException e) {
@@ -190,7 +214,7 @@ public class FileRead implements Persistence {
         i=0;
         
         try {
-            reader = new FileReader("Files/spicejet.Schedule.csv");
+            reader = new FileReader("Files/spicejet.Schedule1.csv");
             br = new BufferedReader(reader);            
             str = br.readLine();            
             str = br.readLine();
@@ -233,15 +257,15 @@ public class FileRead implements Persistence {
                         }
                         
                     }
-                    if(strPart3 != null){
+                    if(strPart3 != null) {
                         StringTokenizer dataPart3 = new StringTokenizer(strPart3, ",");
                         flights[i].setFlightNo(dataPart3.nextToken());
                         flights[i].setDepTime(dataPart3.nextToken());
                         flights[i].setArrTime(dataPart3.nextToken());
-                        flights[i].setVia(dataPart3.nextToken());
+                        flights[i].setVia(dataPart3.nextToken().toUpperCase());
                         eff_from[i] = dataPart3.nextToken();
                         temp = dataPart3.nextToken();
-                        if(temp.contains("Oct"))
+                        if(temp.contains("Oct") || temp.contains("Mar"))
                             eff_till[i] = temp;
                         else {
                         	i--;
@@ -249,7 +273,7 @@ public class FileRead implements Persistence {
                         }
                     }
                 }
-                else{
+                else {
                     StringTokenizer data = new StringTokenizer(str,",");
                     flights[i].setSource(data.nextToken().trim());
                     flights[i].setDestination(data.nextToken().trim());
@@ -265,17 +289,16 @@ public class FileRead implements Persistence {
                     flights[i].setFlightNo(data.nextToken());
                     flights[i].setDepTime(data.nextToken());
                     flights[i].setArrTime(data.nextToken());
-                    flights[i].setVia(data.nextToken());
+                    flights[i].setVia(data.nextToken().toUpperCase());
                     eff_from[i] = data.nextToken();
                     temp = data.nextToken();
-                    if(temp.contains("Oct"))
+                    if(temp.contains("Oct") || temp.contains("Mar"))
                         eff_till[i] = temp;
                     else {
                         i--;
                         size--;
                     }
                 }
-                //flights[i].setCapacity(15);
                 i++;
                 strPart1 = null;
                 strPart2 = null;
