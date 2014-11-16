@@ -11,9 +11,9 @@ public class CombinedFlight {
     public int flightCount;
     private String deptSilk,arrSilk,arrSpice,deptSpice,intermediate,totalTime,via,spiceFlightNo,silkFlightNo;
     final int ADDED_TIME = 150;
-    String file1,file2;
+    String file1,file2,date;
     
-    public CombinedFlight(String source,int Day,int month, int passCount,String file1,String file2) {
+    public CombinedFlight(String source,int Day,String date, int passCount,String file1,String file2) {
         int i,j;
         deptSilk="";
         arrSilk="";
@@ -24,7 +24,7 @@ public class CombinedFlight {
         via="";
         spiceFlightNo="";
         silkFlightNo="";
-        String date = Day +"/"+month;
+        this.date = date;
         this.file1=file1;
         this.file2=file2;
         
@@ -120,9 +120,8 @@ public class CombinedFlight {
        return(arrSpice);
     }
     
-    public CombinedFlight[] combine(String source,int Day,int month, int passCount) {
+    public CombinedFlight[] combine(String source,int Day, int passCount) {
         int i,j,totalTime,Count=0;
-        String date = Day+"/"+month;
         SilkAirSchedule silkAir = new SilkAirSchedule(file2);
         silkAir.getBookedFilghts(date, passCount);
         SpiceJetSchedule spiceJet = new SpiceJetSchedule(file1);
@@ -131,7 +130,7 @@ public class CombinedFlight {
         int duration[]=new int[flightCount];
         CombinedFlight cf[]=new CombinedFlight[flightCount];
         for(i=0;i<flightCount;i++)
-            cf[i]=new CombinedFlight(source,Day,month, passCount,file1,file2);
+            cf[i]=new CombinedFlight(source,Day,date, passCount,file1,file2);
         
         for(i=0;i<spiceJet.size;i++) {
             if(spiceJet.flights[i].getSource().compareTo(source) == 0 && spiceJet.flights[i].getFrequency(Day)) { 

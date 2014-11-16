@@ -21,7 +21,9 @@ class EDMouse extends MouseAdapter {
     @Override
     public void mouseClicked(MouseEvent e) {
         if(check==true)
+        {
             obj.objdisplay.frame.show();
         obj.Bframe.dispose();
+        }
     }
 }

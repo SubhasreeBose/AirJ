@@ -42,9 +42,6 @@ public class DisplayManager implements Display{
         new BookingPage(objdisplay,objsearch);
     }
 
-    @Override
-    public void displayTicket() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+   
     
 }

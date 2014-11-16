@@ -31,7 +31,7 @@ public class BookButton implements ActionListener {
             	cf=obj.objdisplay.getSelectedFlight();
             	FileRead fr = new FileRead();
             	String date = obj.objsearch.CBDated.getSelectedItem().toString() + "/" + obj.objdisplay.month;
-            	System.out.println(obj.objsearch.CBDated.getSelectedItem().toString()+ " " + obj.objdisplay.passCount);
+            	//System.out.println(cf.getSilkFlightNo());
             	fr.saveBooking(cf, date, obj.objdisplay.passCount);
                 new PrintTicket(obj);
                 //obj.Bframe.dispose();

@@ -31,10 +31,12 @@ public class BookingPage extends JFrame {
         int y = (screenSize.height - Bframe.getHeight()) / 2;
         Bframe.setLocation(x, y);
         Bframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        ImageIcon img = new ImageIcon("Images/jet-icon1.png");
+        Bframe.setIconImage(img.getImage());
        
         FontAwesome f=new FontAwesome();
                 
-        Icon img1 = new ImageIcon("Images/logo-without-bg.png");
+        Icon img1 = new ImageIcon("Images/logo-without-bg1.png");
         JLabel LLogo = new JLabel("", img1, SwingConstants.LEFT);
         LLogo.setBounds(0, 0, 700,70);
         JLabel Ltag=new JLabel("<html><i><font face=\"verdana\" size=\"3\" color=\"white\">The smarter, easier and faster way to fly.</font></i></html>");
@@ -44,66 +46,67 @@ public class BookingPage extends JFrame {
         Icon imgedit=new ImageIcon("Images/Edit.gif");        
         
         JLabel LName=new JLabel("<html><B> Name: </B></html>");
-        LName.setForeground(Color.white);
+        LName.setForeground(Color.black);
         TxtName=new JTextField();
         JLabel LEmail=new JLabel("<html><B> Email ID: </B></html>");
         Txtemail=new JTextField();
-        LEmail.setForeground(Color.white);
+        LEmail.setForeground(Color.black);
         JLabel info=new JLabel("<html><font color=red size=1> * Details of your booking will be e-mailed to you</font></html>");
         
       
         JLabel Limglogo1 = new JLabel("\uf1d9");
         Limglogo1.setFont(f.sm);
-        Limglogo1.setForeground(Color.white);
+        Limglogo1.setForeground(Color.black);
         JLabel Limglogo2 = new JLabel("\uf1d8"); 
         Limglogo2.setFont(f.sm);
-        Limglogo2.setForeground(Color.white);
+        Limglogo2.setForeground(Color.black);
         JLabel Lflightno1=new JLabel();
         flight1=(String) objdisplay.TFlight.getModel().getValueAt(objdisplay.selRow, 1);
         Lflightno1.setText(flight1);
-        Lflightno1.setForeground(Color.white);
+        Lflightno1.setForeground(Color.black);
         JLabel Lflightno2=new JLabel();
         flight2=(String) objdisplay.TFlight.getModel().getValueAt(objdisplay.selRow, 6);
         Lflightno2.setText(flight2);
-        Lflightno2.setForeground(Color.white);
+        Lflightno2.setForeground(Color.black);
         JLabel Larr1=new JLabel();
         Larr1.setText((String) objdisplay.TFlight.getModel().getValueAt(objdisplay.selRow, 0));
-        Larr1.setForeground(Color.white);
+        Larr1.setForeground(Color.black);
         JLabel Ldept1=new JLabel();
         Ldept1.setText((String) objdisplay.TFlight.getModel().getValueAt(objdisplay.selRow, 2));
-        Ldept1.setForeground(Color.white);
+        Ldept1.setForeground(Color.black);
         JLabel Larr2=new JLabel();
         Larr2.setText((String) objdisplay.TFlight.getModel().getValueAt(objdisplay.selRow, 7));
-        Larr2.setForeground(Color.white);
+        Larr2.setForeground(Color.black);
         JLabel Ldept2=new JLabel();
-        Ldept2.setForeground(Color.white);
+        Ldept2.setForeground(Color.black);
         Ldept2.setText((String) objdisplay.TFlight.getModel().getValueAt(objdisplay.selRow, 5));
         
         
         JLabel LDate=new JLabel("<html><B>Date</B></html>");
-        LDate.setForeground(Color.white);
+        LDate.setForeground(Color.black);
         JLabel LFlightS1=new JLabel("<html><B></B></html>");
-        LFlightS1.setForeground(Color.white);
+        LFlightS1.setForeground(Color.black);
         LFlightS1.setText(objsearch.CBPlace.getSelectedItem().toString());
         JLabel LFlightS2=new JLabel("<html><B></B></html>");
         inter=(String) objdisplay.TFlight.getModel().getValueAt(objdisplay.selRow, 3);
         LFlightS2.setText(inter);
-        LFlightS2.setForeground(Color.white);
+        LFlightS2.setForeground(Color.black);
         JLabel LFlightD1=new JLabel("<html><B></B></html>");
         LFlightD1.setText(inter);
-        LFlightD1.setForeground(Color.white);
+        LFlightD1.setForeground(Color.black);
         JLabel LFlightD2=new JLabel("<html><B>SINGAPORE</B></html>");
-        LFlightD2.setForeground(Color.white);
+        LFlightD2.setForeground(Color.black);
         Icon imgline=new ImageIcon("Images\\line.png");
+        Icon imglinew=new ImageIcon("Images\\linew.png");
         JLabel Limgarrow1 = new JLabel("", imgline, SwingConstants.LEFT);
         JLabel Limgarrow2 = new JLabel("", imgline, SwingConstants.LEFT);
         
         JLabel imgtime = new JLabel("\uf017");
         imgtime.setFont(f.sm);
-        imgtime.setForeground(Color.white);
+        imgtime.setForeground(Color.black);
         imgtime.setBounds(50, 410, 100, 50);
         JLabel LTime=new JLabel("<html><B>Total Time Duration : "+(String) objdisplay.TFlight.getModel().getValueAt(objdisplay.selRow, 8)+"</B></html>");
-        LTime.setForeground(Color.white);
+        LTime.setForeground(Color.black);
         
         licenseBox = new JCheckBox(" I agree that flight schedule is subject to change under certain conditions.");
         licenseBox.setMnemonic(KeyEvent.VK_C); 
@@ -123,8 +126,8 @@ public class BookingPage extends JFrame {
         LFlightD1.setBounds(520,250,300,30);
         LFlightS2.setBounds(120,350,300,30);
         LFlightD2.setBounds(520,350,250,30);
-        Limgarrow1.setBounds(198,237,300,50);
-        Limgarrow2.setBounds(198,337,300,50);
+        Limgarrow1.setBounds(198,237,300,3);
+        Limgarrow2.setBounds(198,337,300,3);
         LTime.setBounds(100,425,300,30);        
         TxtName.setBounds(110, 480, 180, 20);
         LName.setBounds(50, 480, 40, 20);
@@ -161,30 +164,30 @@ public class BookingPage extends JFrame {
         pane.add(Limgarrow2);
         pane.add(Limgarrow1);
         pane.setBounds(0,220,650,300);
-        pane.setBackground(Color.decode("#1abc9c"));
+        pane.setBackground(Color.decode("#B0D4E6"));
         
         
         
         JLabel LOne=new JLabel("\uf002");
         LOne.setFont(f.sm);
-        LOne.setForeground(Color.decode("#1abc9c"));
+        LOne.setForeground(Color.decode("#B0D4E6"));
         
-        JLabel Lline1=new JLabel("", imgline, SwingConstants.LEFT);
-        JLabel Lline2=new JLabel("", imgline, SwingConstants.LEFT);
-        JLabel Lline3=new JLabel("", imgline, SwingConstants.LEFT);
+        JLabel Lline1=new JLabel("", imglinew, SwingConstants.LEFT);
+        JLabel Lline2=new JLabel("", imglinew, SwingConstants.LEFT);
+        
         
         JLabel LThree=new JLabel("\uf00c");
-        LThree.setFont(f.sm);
+        LThree.setFont(f.med);
         LThree.setForeground(Color.white);
         
         JLabel LTwo=new JLabel("\uf0ca");
         LTwo.setFont(f.sm);
-        LTwo.setForeground(Color.decode("#1abc9c"));
+        LTwo.setForeground(Color.decode("#B0D4E6"));
         search=new JLabel("\uf044");
-        search.setFont(f.sm);
+        search.setFont(f.m);
         search.setForeground(Color.white);
         display=new JLabel("\uf044");
-        display.setFont(f.sm);
+        display.setFont(f.m);
         display.setForeground(Color.white);
         JLabel book=new JLabel("<html><B><font size=\"2\">Book Flight</font></B></html>");
         book.setForeground(Color.white);
@@ -233,7 +236,7 @@ public class BookingPage extends JFrame {
         Bframe.add(Larr1);
         Bframe.add(Ldept2);
         Bframe.add(Ldept1);
-        Bframe.add(info);
+        //Bframe.add(info);
         
         Bframe.add(Larr2);
         Bframe.add(pane);

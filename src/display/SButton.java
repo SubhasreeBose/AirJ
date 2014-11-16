@@ -30,7 +30,7 @@ public class SButton implements ActionListener {
     	day=obj.CBDated.getSelectedItem().toString();
         mon=obj.CBDatem.getSelectedItem().toString();
         yr=obj.CBDatey.getSelectedItem().toString();
-    	ValidateDate vd=new ValidateDate(day.trim(),mon.trim(),yr.trim());
+    	ValidateDate vd=new ValidateDate(day.trim(),mon.trim(),yr.trim(),obj.file1,obj.file2);
     	int check=vd.validateDate();
     
     	if(check==1)

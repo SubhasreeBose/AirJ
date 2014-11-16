@@ -6,6 +6,8 @@ import java.util.GregorianCalendar;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import persistence.FileRead;
+
 import util.ValidateDate;
 
 import data.CombinedFlight;
@@ -17,7 +19,7 @@ import data.CombinedFlight;
 
 public class StdDisplayManager implements Display{
 
-    String source,file1,file2;
+    String source,file1,file2,date;
     int passenger,d,mon;
     String day,m,y;
     
@@ -62,7 +64,7 @@ public class StdDisplayManager implements Display{
         		m=sc.next();
         		System.out.println("Enter year:");
         		y=sc.next();
-        		ValidateDate vd=new ValidateDate(day,m,y);
+        		ValidateDate vd=new ValidateDate(day,m,y,this.file1,this.file2);
         		val=vd.validateDate();
         		mon=vd.checkMonth();
         		if(val==1)
@@ -106,9 +108,10 @@ public class StdDisplayManager implements Display{
         //***********************************************
     	 //PassCount needs to be input
     	//***********************************************
-    	CombinedFlight cf = new  CombinedFlight(source,d,mon, passenger,file1,file2);
+        date=day+"/"+mon;
+    	CombinedFlight cf = new  CombinedFlight(source,d,date, passenger,file1,file2);
         CombinedFlight filteredFlight[]=new CombinedFlight[cf.flightCount];
-        filteredFlight=cf.combine(source,d,mon, passenger);
+        filteredFlight=cf.combine(source,d, passenger);
         System.out.println("\n\nShowing available flights...");
         System.out.println("===========================================================================================");
         System.out.println("Total number of available flights: " + cf.flightCount);
@@ -206,6 +209,8 @@ public class StdDisplayManager implements Display{
             choice=sc.next();
             
             if(choice.equalsIgnoreCase("y")==true) {
+            	FileRead fr=new FileRead();
+            	fr.saveBooking(temp, date, passenger);
                 System.out.println("You have successfully booked with us.Thank You! Happy Journey!");
                 System.out.println("Press 'E' to exit. Press any key to search another flight.");
                 choice=sc.next();
@@ -220,28 +225,7 @@ public class StdDisplayManager implements Display{
             }       
     }
 
-    @Override
-    public void displayTicket() {
-        
-    }
     
-    /*public static int check(int dd) {
-        Date date = (new GregorianCalendar(2014, 9, dd)).getTime();
-        SimpleDateFormat f = new SimpleDateFormat("EEEE");
-        String d = f.format(date);
-        if(d.compareTo("Sunday") == 0)
-            return 0;
-        else if(d.compareTo("Monday") == 0)
-            return 1;
-        else if(d.compareTo("Tuesday") == 0)
-            return 2;
-        else if(d.compareTo("Wednesday") == 0)
-            return 3;
-        else if(d.compareTo("Thursday") == 0)
-            return 4;
-        else if(d.compareTo("Friday") == 0)
-            return 5;
-        else
-            return 6;
-    }*/
+    
+   
 }

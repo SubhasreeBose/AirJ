@@ -22,8 +22,10 @@ class ESMouse extends MouseAdapter {
     @Override
     public void mouseClicked(MouseEvent e) {
         if(check==true)
+        {
             obj.objsearch.frame.show();
         obj.Bframe.dispose();  
+        }
     }
     
 }

@@ -357,13 +357,17 @@ public class FileRead implements Persistence {
             		reader = new FileReader(f);
             		br = new BufferedReader(reader);
             		str = br.readLine();
+            		
             		while(str != null) {
+            			
             			StringTokenizer data1 = new StringTokenizer(str, ",");
             			strPart1 = data1.nextToken();
             			if(strPart1.compareTo(flights[i].getFlightNo()) == 0){
             				strPart2 = data1.nextToken();
+            				
             				if(strPart2.compareTo(date) == 0) {
             					strPart3 = data1.nextToken();
+            					
             					cap = Integer.parseInt(strPart3);
             					if(passCount > cap){
             						newFlights.remove(i);

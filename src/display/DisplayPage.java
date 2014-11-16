@@ -35,7 +35,7 @@ public class DisplayPage extends JFrame {
     public DisplayPage(SearchPage objsearch,String file1,String file2) {
 
         String source=objsearch.CBPlace.getSelectedItem().toString();
-        ValidateDate vd=new ValidateDate(objsearch.CBDated.getSelectedItem().toString(),objsearch.CBDatem.getSelectedItem().toString(),objsearch.CBDatey.getSelectedItem().toString());
+        ValidateDate vd=new ValidateDate(objsearch.CBDated.getSelectedItem().toString(),objsearch.CBDatem.getSelectedItem().toString(),objsearch.CBDatey.getSelectedItem().toString(),file1,file2);
     	
         month = vd.checkMonth();
         day=vd.checkDay(Integer.parseInt(objsearch.CBDated.getSelectedItem().toString()), month);
@@ -45,10 +45,10 @@ public class DisplayPage extends JFrame {
         passCount = objsearch.SlidePerson.getValue(); 
         //**************************************************
         
-        CombinedFlight cf = new  CombinedFlight(source, day, month, passCount,file1,file2);
+        CombinedFlight cf = new  CombinedFlight(source, day, date, passCount,file1,file2);
         filteredFlight=new CombinedFlight[cf.flightCount];
-        filteredFlight=cf.combine(source, day, month, passCount);
-        FileRead fr=new FileRead();
+        filteredFlight=cf.combine(source, day, passCount);
+        //FileRead fr=new FileRead();
         //filteredFlight=fr.readBooking(filteredFlight,cf.flightCount,date,passCount);
         row=new String[cf.flightCount][9];
         
@@ -77,6 +77,8 @@ public class DisplayPage extends JFrame {
         frame.setLocation(x, y);
        
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        ImageIcon img = new ImageIcon("Images/jet-icon1.png");
+        frame.setIconImage(img.getImage());
         
         this.objsearch=objsearch;
         
@@ -100,7 +102,8 @@ public class DisplayPage extends JFrame {
         TxtFlight.setEditable(false);
         TxtTime.setEditable(false);
         
-        Icon img1 = new ImageIcon("Images/logo-without-bg.png");
+        Icon img1 = new ImageIcon("Images/logo-without-bg1.png");
+        Icon imglinew=new ImageIcon("Images\\linew.png");
         JLabel LLogo = new JLabel("", img1, SwingConstants.LEFT);
         LLogo.setBounds(0, 0, 700, 70);
         JLabel Ltag=new JLabel("<html><i><font face=\"verdana\" size=\"3\" color=\"white\">The smarter, easier and faster way to fly.</font></i></html>");
@@ -138,8 +141,8 @@ public class DisplayPage extends JFrame {
         
         JScrollPane JSP1 = new JScrollPane(TFlight, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         JSP1.setBounds(2, 270,630, 200);
-        TFlight.setBackground(Color.decode("#1abc9c"));
-        TFlight.setForeground(Color.white);
+        TFlight.setBackground(Color.decode("#B0D4E6"));
+        TFlight.setForeground(Color.black);
         JSP1.setBackground(Color.decode("#34495e"));
         
         JSP1.setVisible(true);
@@ -162,10 +165,10 @@ public class DisplayPage extends JFrame {
         
         JLabel LOne=new JLabel("\uf002");
         LOne.setFont(f.sm);
-        LOne.setForeground(Color.decode("#1abc9c"));
+        LOne.setForeground(Color.decode("#B0D4E6"));
         Icon imgline=new ImageIcon("Images\\line.png");
-        JLabel Lline1=new JLabel("", imgline, SwingConstants.LEFT);
-        JLabel Lline2=new JLabel("", imgline, SwingConstants.LEFT);
+        JLabel Lline1=new JLabel("", imglinew, SwingConstants.LEFT);
+        JLabel Lline2=new JLabel("", imglinew, SwingConstants.LEFT);
         
         
         JLabel LThree=new JLabel("\uf00c");
@@ -173,11 +176,11 @@ public class DisplayPage extends JFrame {
         LThree.setForeground(Color.white);
         
         JLabel LTwo=new JLabel("\uf0ca");
-        LTwo.setFont(f.sm);
+        LTwo.setFont(f.med);
         LTwo.setForeground(Color.white);
         //search=new JLabel("<html><B><font color=\"white\"size=\"2\">Search Flight</font></B></html>");
         search=new JLabel("\uf044");
-        search.setFont(f.sm);
+        search.setFont(f.m);
         search.setForeground(Color.white);
         
         JLabel display=new JLabel("<html><B><font color=\"white\" size=\"2\">Select Flight</font></B></html>");
@@ -230,7 +233,7 @@ public class DisplayPage extends JFrame {
                 	selRow = TFlight.getSelectedRow();                     
                     TxtFlight.setText((String)TFlight.getModel().getValueAt(selRow, 1)); 
                     TxtTime.setText((String)TFlight.getModel().getValueAt(selRow, 6));
-                    System.out.println(selRow);
+                    
                     
                 }
                 catch(Exception e) {
@@ -244,7 +247,7 @@ public class DisplayPage extends JFrame {
     }
  public CombinedFlight getSelectedFlight()
  {
-	 if(selRow!=0)
+	
          ff = filteredFlight[selRow];
 	 return ff;
  }

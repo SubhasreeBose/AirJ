@@ -5,16 +5,24 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class ValidateDate {
-    String day,month,year;
-   public ValidateDate(String day,String month,String year)
+    String day,month,year,file1,file2;
+   public ValidateDate(String day,String month,String year,String file1,String file2)
    {
 	   this.day=day;
 	   this.month=month;
 	   this.year=year;
+	   this.file1=file1;
+	   this.file2=file2;
    }
    public int validateDate()
    {
-	   
+	   if((file1.equalsIgnoreCase("spicejet.Schedule.csv")==true ))
+	   {
+		   if(year.equalsIgnoreCase("2014")==true && month.equalsIgnoreCase("Oct")==true && Integer.parseInt(day)<=26)
+			   return 1;
+	   }
+	   else
+	   {
 	   if(year.equalsIgnoreCase("2014")==true)
 	   {
 		   if(month.equalsIgnoreCase("Oct")==true || month.equalsIgnoreCase("Dec")==true )
@@ -37,6 +45,7 @@ public class ValidateDate {
 		   {
 			   return 1;
 		   }
+	   }
 	   }
 		   
 	   return 0;
