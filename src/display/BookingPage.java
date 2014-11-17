@@ -105,7 +105,7 @@ public class BookingPage extends JFrame {
         imgtime.setFont(f.sm);
         imgtime.setForeground(Color.black);
         imgtime.setBounds(50, 410, 100, 50);
-        JLabel LTime=new JLabel("<html><B>Total Time Duration : "+(String) objdisplay.TFlight.getModel().getValueAt(objdisplay.selRow, 8)+"</B></html>");
+        JLabel LTime=new JLabel("<html><B>Total Time Duration: "+(String) objdisplay.TFlight.getModel().getValueAt(objdisplay.selRow, 8)+"</B></html>");
         LTime.setForeground(Color.black);
         
         licenseBox = new JCheckBox(" I agree that flight schedule is subject to change under certain conditions.");
@@ -116,7 +116,7 @@ public class BookingPage extends JFrame {
         BBook=new JButton("Book");        
         
         JLabel LDummy=new JLabel("<html><B> </B></html>");   
-        JLabel selection=new JLabel("Your selection ");
+        JLabel selection=new JLabel("Selected Flight:");
         selection.setForeground(Color.white);        
         selection.setBounds(50,180,170,50);
          
@@ -126,9 +126,9 @@ public class BookingPage extends JFrame {
         LFlightD1.setBounds(520,250,300,30);
         LFlightS2.setBounds(120,350,300,30);
         LFlightD2.setBounds(520,350,250,30);
-        Limgarrow1.setBounds(198,237,300,3);
-        Limgarrow2.setBounds(198,337,300,3);
-        LTime.setBounds(100,425,300,30);        
+        Limgarrow1.setBounds(202,262,300,3);
+        Limgarrow2.setBounds(202,362,300,3);
+        LTime.setBounds(80,420,300,30);        
         TxtName.setBounds(110, 480, 180, 20);
         LName.setBounds(50, 480, 40, 20);
         Txtemail.setBounds(420, 480, 180, 20);
@@ -177,30 +177,30 @@ public class BookingPage extends JFrame {
         
         
         JLabel LThree=new JLabel("\uf00c");
-        LThree.setFont(f.med);
+        LThree.setFont(f.lg);
         LThree.setForeground(Color.white);
         
         JLabel LTwo=new JLabel("\uf0ca");
         LTwo.setFont(f.sm);
         LTwo.setForeground(Color.decode("#B0D4E6"));
         search=new JLabel("\uf044");
-        search.setFont(f.m);
+        search.setFont(f.sm2);
         search.setForeground(Color.white);
         display=new JLabel("\uf044");
-        display.setFont(f.m);
+        display.setFont(f.sm2);
         display.setForeground(Color.white);
-        JLabel book=new JLabel("<html><B><font size=\"2\">Book Flight</font></B></html>");
+        JLabel book=new JLabel("<html><B><font size=\"3\">Book Flight</font></B></html>");
         book.setForeground(Color.white);
         
-        LOne.setBounds(50, 100, 50, 50);
+        LOne.setBounds(55, 100, 50, 50);
         LTwo.setBounds(300, 100, 50, 50);
         LThree.setBounds(550, 75, 70, 100);
-        search.setBounds(50, 140, 150, 30);
-        display.setBounds(300, 140, 150, 30);
-        book.setBounds(530, 140, 150, 30);
+        search.setBounds(60, 145, 150, 30);
+        display.setBounds(300, 145, 150, 30);
+        book.setBounds(530, 145, 150, 30);
         
-        Lline1.setBounds(90,110,200,20);
-        Lline2.setBounds(340,110,200,20);
+        Lline1.setBounds(90,120,200,10);
+        Lline2.setBounds(340,120,200,10);
         
         Bframe.add(Lline1);
         Bframe.add(Lline2);

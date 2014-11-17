@@ -74,16 +74,16 @@ public class SearchPage extends JFrame{
         JLabel LTo=new JLabel("<html><B><font size=\"4\" >To</font></B></html>");
         JLabel LFrom=new JLabel("<html><B><font size=\"4\">From</font></B></html>");  
         JLabel Larrow=new JLabel("\uf072");
-        Larrow.setFont(f.sm);
+        Larrow.setFont(f.med);
         Larrow.setForeground(Color.black);
         
-        JLabel LPlace=new JLabel("<html>SINGAPORE</html>");
+        JLabel LPlace=new JLabel("<html><b>SINGAPORE</b></html>");
         CBPlace=new JComboBox(places);
        
-        LTo.setBounds(430, 230, 40, 30);
-        LFrom.setBounds(150, 230, 50, 30);
-        LPlace.setBounds(410, 270, 170, 20);
-        CBPlace.setBounds(130, 270, 100, 20);
+        LTo.setBounds(465, 230, 40, 30);
+        LFrom.setBounds(129, 230, 50, 30);
+        LPlace.setBounds(445, 270, 170, 20);
+        CBPlace.setBounds(107, 270, 100, 20);
         Larrow.setBounds(300, 250, 150, 50); 
         
         LTo.setForeground(Color.black);
@@ -98,11 +98,11 @@ public class SearchPage extends JFrame{
         CBDatem=new JComboBox(month);
         CBDatey=new JComboBox(year);
         
-        LDate.setBounds(130, 365, 100, 20);
-        Limgdate.setBounds(150,330,30,30);
-        CBDated.setBounds(105,400,40,20);
-        CBDatem.setBounds(155,400,50,20);
-        CBDatey.setBounds(215,400,60,20); 
+        LDate.setBounds(107, 365, 100, 20);
+        Limgdate.setBounds(137,330,30,30);
+        CBDated.setBounds(75,400,40,20);
+        CBDatem.setBounds(124,400,55,20);
+        CBDatey.setBounds(187,400,55,20); 
         CBDated.setBackground(Color.decode("#B0D4E6"));
         CBDatem.setBackground(Color.decode("#B0D4E6"));
         CBDatey.setBackground(Color.decode("#B0D4E6"));
@@ -126,7 +126,7 @@ public class SearchPage extends JFrame{
         
         LPerson.setBounds(410, 360, 200, 30);
         SlidePerson.setBounds(390, 395, 185, 50);
-        Limgpassenger.setBounds(430, 320, 50, 50);  
+        Limgpassenger.setBounds(465, 320, 50, 50);  
         
         licenseBox = new JCheckBox("Yes, I agree that all passengers are between 1 and 70 years of age.");
         licenseBox.setMnemonic(KeyEvent.VK_C);
@@ -162,7 +162,7 @@ public class SearchPage extends JFrame{
         BSearch.setBounds(230,520,180,30);  
         
         JLabel LOne=new JLabel("\uf002");
-        LOne.setFont(f.med);
+        LOne.setFont(f.lg);
         LOne.setForeground(Color.white);
         Icon imglinew=new ImageIcon("Images\\linew.png");
         Icon imgline=new ImageIcon("Images\\line.png");
@@ -177,19 +177,19 @@ public class SearchPage extends JFrame{
         JLabel LTwo=new JLabel("\uf0ca");
         LTwo.setFont(f.sm);
         LTwo.setForeground(Color.white);
-        JLabel search=new JLabel("<html><B><font color=\"white\"size=\"2\">Search Flight</font></B></html>");
-        JLabel display=new JLabel("<html><B><font color=\"white\" size=\"2\">Select Flight</font></B></html>");
-        JLabel book=new JLabel("<html><B><font color=\"white\" size=\"2\">Book Flight</font></B></html>");
+        JLabel search=new JLabel("<html><B><font color=\"white\"size=\"3\">Search Flight</font></B></html>");
+        JLabel display=new JLabel("<html><B><font color=\"white\" size=\"3\">Select Flight</font></B></html>");
+        JLabel book=new JLabel("<html><B><font color=\"white\" size=\"3\">Book Flight</font></B></html>");
         
         LOne.setBounds(40, 105, 70, 100);
         LTwo.setBounds(300, 130, 50, 50);
         LThree.setBounds(550, 130, 50, 50);
-        search.setBounds(50, 180, 150, 30);
-        display.setBounds(300, 180, 150, 30);
-        book.setBounds(530, 180, 150, 30);
+        search.setBounds(28, 180, 150, 30);
+        display.setBounds(280, 180, 150, 30);
+        book.setBounds(535, 180, 150, 30);
         Lline1.setBounds(90,150,200,20);
         Lline2.setBounds(340,150,200,20);
-        Lline3.setBounds(90,305,450,2);
+        Lline3.setBounds(0,315,1150,2);
         fillpane.add(Lline3);
         	
         frame.add(LOne);

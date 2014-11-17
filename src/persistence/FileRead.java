@@ -32,22 +32,26 @@ public class FileRead implements Persistence {
         String str; 
         int i = 0;
         try {
-        	
            reader = new FileReader("Files/"+file);
            br = new BufferedReader(reader);
         }
         catch(FileNotFoundException e) {
             System.out.println("File is not found");
         }
-        try{
+        catch(NullPointerException e) {
+        	System.out.println("Null value of reader!");
+        }
+        
+        try {
             str = br.readLine();
             while(str != null) {
                 i++;
                 str = br.readLine();
             }
+            reader.close();
             br.close();
         }
-        catch(Exception e){
+        catch(Exception e) {
             e.printStackTrace();
         }
 
@@ -139,6 +143,7 @@ public class FileRead implements Persistence {
                 strPart3 = null;
                 str = br.readLine();
             }
+            reader.close();
             br.close();
         }
         catch (IOException e) {
@@ -147,6 +152,7 @@ public class FileRead implements Persistence {
         finally {
            if(reader != null) {
                try {
+            	   reader.close();
                    br.close();
                }
                catch (IOException e) {
@@ -168,14 +174,19 @@ public class FileRead implements Persistence {
            br = new BufferedReader(reader);
         }
         catch(FileNotFoundException e) {
-            System.out.println("File is not found");
+            System.out.println("File is not found!");
         }
-        try{
+        catch(NullPointerException e) {
+        	System.out.println("Null value of reader!");
+        }
+        
+        try {
             str = br.readLine();
             while(str != null) {
                 i++;
                 str = br.readLine();
             }
+            reader.close();
             br.close();
         }
         catch(Exception e){
@@ -197,14 +208,19 @@ public class FileRead implements Persistence {
            br = new BufferedReader(reader);
         }
         catch(FileNotFoundException e) {
-            System.out.println("File is not found");
+            System.out.println("File is not found!");
         }
+        catch(NullPointerException e) {
+        	System.out.println("Reader is null!");
+        }
+        
         try{
             str = br.readLine();
             while(str != null) {
                 i++;
                 str = br.readLine();
             }
+            reader.close();
             br.close();
         }
         catch(Exception e){
@@ -285,7 +301,7 @@ public class FileRead implements Persistence {
                     flights[i].setDestination(data.nextToken().trim());
                     temp = data.nextToken();
                     
-                    if(temp.compareTo("Daily") == 0){
+                    if(temp.compareTo("Daily") == 0) {
                         for(int x=0; x<=7; x++)
                             flights[i].setFrequency(x, true);
                     }
@@ -311,15 +327,17 @@ public class FileRead implements Persistence {
                 strPart3 = null;
                 str = br.readLine();
             }
-            br.close();      
+            br.close();
+            reader.close();
         }
         catch (IOException e) {
-           System.out.println("Cannot read the file");
+           System.out.println("Cannot read the file!");
         }
         finally {
             if(reader != null) {
                 try {
-                   br.close();
+                	reader.close();
+                    br.close();
                 }
                 catch (IOException e) {
                    System.out.println("Error in closing the file");
@@ -344,25 +362,21 @@ public class FileRead implements Persistence {
             newFlights.add(flights[i]);
         try {
             File f = new File("Files/book.csv");
-            if(!f.exists()){
+            if(!f.exists())
                 f.createNewFile();
-            }
             else {
             	for(i=0; i<size; i++) {
             		reader = new FileReader(f);
             		br = new BufferedReader(reader);
             		str = br.readLine();
             		
-            		while(str != null) {
-            			
+            		while(str != null) {            			
             			StringTokenizer data1 = new StringTokenizer(str, ",");
             			strPart1 = data1.nextToken();
             			if(strPart1.compareTo(flights[i].getFlightNo()) == 0){
-            				strPart2 = data1.nextToken();
-            				
+            				strPart2 = data1.nextToken();            				
             				if(strPart2.compareTo(date) == 0) {
-            					strPart3 = data1.nextToken();
-            					
+            					strPart3 = data1.nextToken();            					
             					cap = Integer.parseInt(strPart3);
             					if(passCount > cap){
             						newFlights.remove(i);
@@ -380,7 +394,7 @@ public class FileRead implements Persistence {
     		}
         }
         catch(Exception e){
-        	
+        	e.printStackTrace();
         }
         
         if(!newFlights.isEmpty()) {
@@ -409,7 +423,7 @@ public class FileRead implements Persistence {
                     strPart1 = data1.nextToken();
                     if(strPart1.compareTo(cf.getSpiceFlightNo()) == 0){
                         strPart2 = data1.nextToken();
-                        if(strPart2.compareTo(date) == 0){    ////check flight of that day
+                        if(strPart2.compareTo(date) == 0) {    ////check flight of that day
                             strPart3 = data1.nextToken();
                             cap = Integer.parseInt(strPart3);
                             newFile = newFile.replace((strPart1+","+strPart2+","+strPart3), (strPart1+","+strPart2+","+Integer.toString(cap-passCount)));
@@ -434,7 +448,7 @@ public class FileRead implements Persistence {
                 newFile += cf.getSilkFlightNo() + "," + date + "," + (15-passCount) + "\r\n";
                 flagSpice = true; flagSilk = true;
             }
-            if (!flagSpice)
+            if(!flagSpice)
                 newFile += cf.getSpiceFlightNo() + "," + date + "," + (15-passCount) + "\r\n";
             if(!flagSilk)
                 newFile += cf.getSilkFlightNo() + "," + date + "," + (15-passCount) + "\r\n";
@@ -442,8 +456,8 @@ public class FileRead implements Persistence {
             fw.write(newFile);
             fw.close();
         }
-        catch(Exception e){
-            
+        catch(Exception e) {
+            e.printStackTrace();
         }
     }
 }

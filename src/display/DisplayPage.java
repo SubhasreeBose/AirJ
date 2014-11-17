@@ -19,7 +19,7 @@ import data.CombinedFlight;
 
 public class DisplayPage extends JFrame {
     
-    final String[] col ={"Departure","SpiceJet","Arrival","Intermediate","Via","Departure","SilkAir","Arrival" ,"Duration"};
+    final String[] col ={"Departure","SpiceJet","Arrival","Intermediate","Via","Departure","SilkAir","Arrival (SST)" ,"Duration"};
     final String[][] row;
     JFrame frame;
     JTextField TxtFlight,TxtTime;
@@ -29,7 +29,7 @@ public class DisplayPage extends JFrame {
     int selRow;
     public int month,day,passCount;
     private CombinedFlight  ff;
-    CombinedFlight filteredFlight[];    
+    CombinedFlight filteredFlight[];
     
     public DisplayPage(SearchPage objsearch,String file1,String file2) {
 
@@ -49,8 +49,7 @@ public class DisplayPage extends JFrame {
         row=new String[cf.flightCount][9];
         
         int i;
-        for(i=0;i<cf.flightCount;i++)
-        {
+        for(i=0;i<cf.flightCount;i++) {
             row[i][0]=filteredFlight[i].getDeptSpice();
             row[i][1]=filteredFlight[i].getSpiceFlightNo();
             row[i][2]=filteredFlight[i].getArrSpice();
@@ -61,8 +60,7 @@ public class DisplayPage extends JFrame {
             row[i][7]=filteredFlight[i].getArrSilk();
             row[i][8]=filteredFlight[i].getDuration();
                         
-        }
-       
+        }      
         
         frame=new JFrame("Display");
         frame.setSize(650, 660);
@@ -144,7 +142,7 @@ public class DisplayPage extends JFrame {
         JSP1.setVisible(true);
         
         JLabel selection=new JLabel();
-        String str1="Flight result for : To SINGAPORE from "+objsearch.CBPlace.getSelectedItem().toString()+ " on " +objsearch.CBDated.getSelectedItem().toString() +" "+objsearch.CBDatem.getSelectedItem().toString()+" "+objsearch.CBDatey.getSelectedItem().toString()+"  for " + objsearch.SlidePerson.getValue()+" passengers";
+        String str1="Flight result for: To SINGAPORE from "+objsearch.CBPlace.getSelectedItem().toString()+ " on " +objsearch.CBDated.getSelectedItem().toString() +" "+objsearch.CBDatem.getSelectedItem().toString()+" "+objsearch.CBDatey.getSelectedItem().toString()+"  for " + objsearch.SlidePerson.getValue()+" passengers";
         selection.setText(str1);
         selection.setBounds(30,190,570,50);
         selection.setForeground(Color.white);
@@ -174,21 +172,20 @@ public class DisplayPage extends JFrame {
         JLabel LTwo=new JLabel("\uf0ca");
         LTwo.setFont(f.med);
         LTwo.setForeground(Color.white);
-        //search=new JLabel("<html><B><font color=\"white\"size=\"2\">Search Flight</font></B></html>");
+        //search=new JLabel("<html><B><font color=\"white\"size=\"4\">Search Flight</font></B></html>");
         search=new JLabel("\uf044");
-        search.setFont(f.m);
+        search.setFont(f.sm2);
         search.setForeground(Color.white);
         
-        JLabel display=new JLabel("<html><B><font color=\"white\" size=\"2\">Select Flight</font></B></html>");
-        JLabel book=new JLabel("<html><B><font color=\"white\" size=\"2\">Book Flight</font></B></html>");
+        JLabel display=new JLabel("<html><B><font color=\"white\" size=\"3\">Select Flight</font></B></html>");
+        JLabel book=new JLabel("<html><B><font color=\"white\" size=\"3\">Book Flight</font></B></html>");
         
         LOne.setBounds(40, 75, 70, 100);
-        LTwo.setBounds(300, 100, 50, 50);
+        LTwo.setBounds(297, 100, 50, 50);
         LThree.setBounds(550, 100, 50, 50);
-        search.setBounds(50, 140, 50, 30);
-        display.setBounds(300, 140, 150, 30);
-        book.setBounds(530, 140, 150, 30);
-        
+        search.setBounds(50, 145, 50, 30);
+        display.setBounds(280, 145, 150, 30);
+        book.setBounds(535, 145, 150, 30);        
        
         search.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         

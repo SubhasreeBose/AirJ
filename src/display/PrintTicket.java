@@ -37,9 +37,7 @@ public class PrintTicket extends JFrame {
         Icon img1 = new ImageIcon("Images\\logo-without-bg1.png");
         JLabel LLogo = new JLabel("", img1, SwingConstants.LEFT);
         LLogo.setBounds(10,0,150,70);
-        
-        //JLabel LHeading=new JLabel("<html><font size=\"3\"color=\"#B20000\">Thanks for booking with us.Happy Journey!</font></html>");
-        JLabel LName=new JLabel("<html><B><font size=\"2\"color=\"black\">Booked by "+obj.TxtName.getText()+"</font> </B></html>");
+        JLabel LName=new JLabel("<html><B><font size=\"3\"color=\"black\">Booked by: "+obj.TxtName.getText()+"</font> </B></html>");
        
         
         
@@ -49,27 +47,24 @@ public class PrintTicket extends JFrame {
         
         JLabel LDummy=new JLabel("<html><B> </B></html>");
         JLabel LDate=new JLabel("<html><B><font size=\"4\"color=\"white\">Successfully Booked Flight!"+"\t\t\t"+obj.objsearch.CBDated.getSelectedItem().toString()+" Oct 2014</font></B></html>");
-        JLabel LPerson=new JLabel("<html><B><font size=\"4\"color=\"black\">Boarding pass for "+obj.objsearch.SlidePerson.getValue()+ "</font></B></html>");
-        JLabel LFlight1=new JLabel("<html><B><font size=\"3\"color=\"black\">"+obj.flight1+" Flight from "+obj.objsearch.CBPlace.getSelectedItem().toString()+" to "+obj.inter+" .</font></B></html>");
-        JLabel LFlight2=new JLabel("<html><B><font size=\"3\"color=\"black\">"+obj.flight2+" Flight from "+obj.inter+" to SINGAPORE .</font></B></html>");
-        JLabel LTime=new JLabel("<html><B><font size=\"2\"color=\"blue\">Time</font></B></html>");
-        JTextField TxtName=new JTextField();        
+        JLabel LPerson=new JLabel("<html><B><font size=\"3\"color=\"black\">Boarding pass for "+obj.objsearch.SlidePerson.getValue()+ ".</font></B></html>");
+        JLabel LFlight1=new JLabel("<html><B><font size=\"3\"color=\"black\">"+obj.flight1+" Flight from "+obj.objsearch.CBPlace.getSelectedItem().toString()+" to "+obj.inter+".</font></B></html>");
+        JLabel LFlight2=new JLabel("<html><B><font size=\"3\"color=\"black\">"+obj.flight2+" Flight from "+obj.inter+" to SINGAPORE.</font></B></html>");
+        JLabel LTime=new JLabel("<html><B><font size=\"2\"color=\"blue\">Time</font></B></html>");   
         
         JLabel barcode=new JLabel("\uf02a");
         barcode.setFont(f.lg);
        
         LDate.setBounds(170, 20, 270, 30);
-        LPerson.setBounds(150, 90, 200, 30); 
+        LPerson.setBounds(125, 100, 200, 30); 
         
-        LFlight1.setBounds(30,140,350,30);
-        //LHeading.setBounds(20,10,250,30);
-        LFlight2.setBounds(30,170,350,30);
+        LFlight1.setBounds(125,130,350,30);
+        LFlight2.setBounds(125,160,350,30);
         LTime.setBounds(30,120,70,30);
         BBook.setBounds(30,230,50,30);
         barcode.setBounds(430,230,500,30);
-        //TxtName.setBounds(130, 50, 100, 30);
         
-        LName.setBounds(345, 205, 240, 30);
+        LName.setBounds(125, 195, 240, 30);
          
         
         JPanel pane=new JPanel();

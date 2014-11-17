@@ -54,16 +54,21 @@ public class CombinedFlight {
                             if(time >= 120 && time <= 360)
                                 flightCount++;
                         }
+                    
+	                    /*
+	                     * The following else-if part is to check
+	                     * if the flight MI 475 which departs at 00:45
+	                     * is available or not.
+	                     */
+	                    if(silkAir.flights[j].getFrequency((Day+1)%7)) {
+	                    	int time = timediff(arrTimeHr, arrTimeMin, silkAir.getHr(j, DEPARTURE), silkAir.getMin(j, ARRIVAL), true);
+	                    	if(time >= 120 && time <= 360) {
+	                    		if(silkAir.getHr(j, DEPARTURE) < 6)
+	                    			flightCount++;
+	                     	}
+	                    }
                     }
-                    /*
-                     * The following else-if part is to check
-                     * if the flight MI 475 which departs at 00:45
-                     * is available or not.
-                     */
-                    if(silkAir.flights[j].getFrequency((Day+1)%7))
-                    	if(silkAir.getHr(j,  DEPARTURE) < 6)
-                    		flightCount++;
-                }			   
+                }
             }
         }
     }
@@ -130,7 +135,7 @@ public class CombinedFlight {
         SpiceJetSchedule spiceJet = new SpiceJetSchedule(file1);
         spiceJet.getBookedFilghts(date, passCount);
         
-        int duration[]=new int[flightCount];
+        int duration[] = new int[flightCount];
         CombinedFlight cf[]=new CombinedFlight[flightCount];
         for(i=0;i<flightCount;i++)
             cf[i]=new CombinedFlight(source,Day,date, passCount,file1,file2);
@@ -169,7 +174,7 @@ public class CombinedFlight {
                                 totalTime = timediff(spiceJet.getHr(i, DEPARTURE), spiceJet.getMin(i, DEPARTURE), silkAir.getHr(j, ARRIVAL), silkAir.getMin(j, ARRIVAL), (silkAir.flights[j].getArrTime().contains("+1") ? true:false)) - ADDED_TIME;
                                 duration[Count]=totalTime;
                                 cf[Count].setDuration(Integer.toString(totalTime/60)+"hrs "+Integer.toString(totalTime%60)+ "mins");
-                                Count++;                               
+                                Count++;                            
                             }
                         }
                         
@@ -180,7 +185,7 @@ public class CombinedFlight {
                          */
                         if(silkAir.flights[j].getFrequency((Day+1)%7)) {
                         	if(silkAir.getHr(j,  DEPARTURE) < 6) {
-                        		int time = timediff(arrTimeHr, arrTimeMin, depTimeHr, depTimeMin, true); 
+                        		int time = timediff(arrTimeHr, arrTimeMin, silkAir.getHr(j, DEPARTURE), silkAir.getMin(j, ARRIVAL), true); 
                                 if(time >= 120 && time <= 360) {                            
                                     cf[Count].setDeptSpice(spiceJet.flights[i].getDepTime());
                                     cf[Count].setSpiceFlightNo(spiceJet.flights[i].getFlightNo());
@@ -198,7 +203,7 @@ public class CombinedFlight {
                                     totalTime = timediff(spiceJet.getHr(i, DEPARTURE), spiceJet.getMin(i, DEPARTURE), silkAir.getHr(j, ARRIVAL), silkAir.getMin(j, ARRIVAL), true) - ADDED_TIME;
                                     duration[Count] = totalTime;
                                     cf[Count].setDuration(Integer.toString(totalTime/60)+"hrs " + Integer.toString(totalTime%60) + "mins");
-                                    Count++;                             
+                                    Count++;                            
                                 }
                         	}
                         }
@@ -232,7 +237,7 @@ public class CombinedFlight {
         return t; 
     }
     
-    public void sort(int duration[],CombinedFlight cf[]) {
+    public void sort(int duration[], CombinedFlight cf[]) {
         int i,j,k,swap=1;
         
         CombinedFlight temp;
@@ -244,10 +249,9 @@ public class CombinedFlight {
                     k=duration[j];
                     duration[j]=duration[j+1];
                     duration[j+1]=k;
-                    
-                       temp=cf[j];
-                       cf[j]=cf[j+1];
-                       cf[j+1]=temp;
+                    temp=cf[j];
+                    cf[j]=cf[j+1];
+                    cf[j+1]=temp;
                 }
             }
         }
