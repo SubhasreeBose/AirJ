@@ -35,9 +35,7 @@ public class SearchPage extends JFrame{
     JSlider SlidePerson;
     JCheckBox licenseBox;
    
-    public SearchPage()
-    {
-        
+    public SearchPage() {        
         //ImageIcon img = new ImageIcon("Images/images.jpg");
         //frame.setIconImage(img.getImage());
         String []month = {"Oct","Nov","Dec","Jan","Feb","March"};

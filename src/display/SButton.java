@@ -33,8 +33,7 @@ public class SButton implements ActionListener {
     	ValidateDate vd=new ValidateDate(day.trim(),mon.trim(),yr.trim());
     	int check=vd.validateDate();
     
-    	if(check==1)
-    	{
+    	if(check==1) {
     		if(obj.licenseBox.isSelected()) {
     			obj.BSearch.setEnabled(false);
     			obj.pbar.setValue(0);
@@ -46,8 +45,8 @@ public class SButton implements ActionListener {
     			  JOptionPane.showMessageDialog(null, " You need to accept to proceed further!");
     		}
     	}
-    	else
-    	{
+    	
+    	else {
     		JOptionPane.showMessageDialog(null, " Enter a valid Date");
     	}
     		

@@ -1,48 +1,35 @@
 package util;
-//afgaiert
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class ValidateDate {
     String day,month,year;
-   public ValidateDate(String day,String month,String year)
-   {
+   public ValidateDate(String day,String month,String year) {
 	   this.day=day;
 	   this.month=month;
 	   this.year=year;
    }
-   public int validateDate()
-   {
+   
+   public int validateDate() {
 	   
-	   if(year.equalsIgnoreCase("2014")==true)
-	   {
-		   if(month.equalsIgnoreCase("Oct")==true || month.equalsIgnoreCase("Dec")==true )
-		   {
+	   if(year.equalsIgnoreCase("2014")==true) {
+		   if(month.equalsIgnoreCase("Oct")==true || month.equalsIgnoreCase("Dec")==true)
 			   return 1;
-		   }
-		   if(month.equalsIgnoreCase("Nov")==true && day.equalsIgnoreCase("31")==false )
-		   {
+		   if(month.equalsIgnoreCase("Nov")==true && day.equalsIgnoreCase("31")==false)
 			   return 1;
-		   }
 	   }
-	   else if(year.equalsIgnoreCase("2015")==true)
-	   {
-		   if(month.equalsIgnoreCase("Feb")==true || month.equalsIgnoreCase("Mar")==true )
-		   {
+	   else if(year.equalsIgnoreCase("2015")==true) {
+		   if(month.equalsIgnoreCase("Feb")==true || month.equalsIgnoreCase("Mar")==true)
 			   if( day.equalsIgnoreCase("31")==false ||day.equalsIgnoreCase("29")==false||day.equalsIgnoreCase("30")==false)
-			   return 1;
-		   }
+				   return 1;
 		   if(month.equalsIgnoreCase("Jan")==true)
-		   {
 			   return 1;
-		   }
-	   }
-		   
+	   }		   
 	   return 0;
    }
-   public int checkMonth()
-   {
+   public int checkMonth() {
 	   if(month.equalsIgnoreCase("Oct")==true )
 		   return 10;
 	   if(month.equalsIgnoreCase("Nov")==true )
@@ -57,6 +44,7 @@ public class ValidateDate {
 		   return 3;	   
 	   return -1;
    }
+   
    public  int checkDay(int dd,int mm) {
        Date date = (new GregorianCalendar(2014, mm-1, dd)).getTime();
        SimpleDateFormat f = new SimpleDateFormat("EEEE");

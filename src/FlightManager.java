@@ -16,7 +16,7 @@ public class FlightManager {
             	System.out.println(argsv[2]+" display is not implemented.");
          }
          else if(argsv.length==2) {
-             StdDisplayManager sdm=new StdDisplayManager(argsv[0],argsv[1]);
+             StdDisplayManager sdm=new StdDisplayManager(argsv[0], argsv[1]);
              sdm.displaySearchPage();
          }
          else
