@@ -14,6 +14,7 @@ public class SilkAirSchedule extends Flight {
     public SilkAirSchedule(String file) {
         FileRead fr = new FileRead();
         size = fr.silkSize(file);
+        System.out.println("SilkAirSize: " + size);
         flights = fr.readSilkAirFile(file);       
     }
     

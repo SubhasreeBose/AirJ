@@ -75,11 +75,11 @@ public class BookingPage extends JFrame {
         Ldept1.setText((String) objdisplay.TFlight.getModel().getValueAt(objdisplay.selRow, 2));
         Ldept1.setForeground(Color.black);
         JLabel Larr2=new JLabel();
-        Larr2.setText((String) objdisplay.TFlight.getModel().getValueAt(objdisplay.selRow, 7));
+        Larr2.setText((String) objdisplay.TFlight.getModel().getValueAt(objdisplay.selRow, 5)); 
         Larr2.setForeground(Color.black);
         JLabel Ldept2=new JLabel();
         Ldept2.setForeground(Color.black);
-        Ldept2.setText((String) objdisplay.TFlight.getModel().getValueAt(objdisplay.selRow, 5));
+        Ldept2.setText((String) objdisplay.TFlight.getModel().getValueAt(objdisplay.selRow, 7)); 
         
         
         JLabel LDate=new JLabel("<html><B>Date</B></html>");

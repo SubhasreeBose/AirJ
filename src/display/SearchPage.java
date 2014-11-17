@@ -37,11 +37,10 @@ public class SearchPage extends JFrame{
     JSlider SlidePerson;
     JCheckBox licenseBox;
    
-    public SearchPage(String file1,String file2)
-    {
+    public SearchPage(String file1,String file2) { 
+    	
     	this.file1=file1;
-    	this.file2=file2;
-        
+    	this.file2=file2;        
         
         String []month = {"Oct","Nov","Dec","Jan","Feb","Mar"};
         String []year = {"2014","2015"};
@@ -71,24 +70,15 @@ public class SearchPage extends JFrame{
         LHeading.setBounds(50, 80, 600, 50);
          
         JPanel fillpane=new JPanel();
-        
-       
-        FontAwesome f=new FontAwesome();
-        
+        FontAwesome f=new FontAwesome();        
         JLabel LTo=new JLabel("<html><B><font size=\"4\" >To</font></B></html>");
-        
-        
-        
-        JLabel LFrom=new JLabel("<html><B><font size=\"4\">From</font></B></html>");
-         
-        
+        JLabel LFrom=new JLabel("<html><B><font size=\"4\">From</font></B></html>");  
         JLabel Larrow=new JLabel("\uf072");
         Larrow.setFont(f.sm);
         Larrow.setForeground(Color.black);
         
         JLabel LPlace=new JLabel("<html>SINGAPORE</html>");
         CBPlace=new JComboBox(places);
-        
        
         LTo.setBounds(430, 230, 40, 30);
         LFrom.setBounds(150, 230, 50, 30);
@@ -96,29 +86,13 @@ public class SearchPage extends JFrame{
         CBPlace.setBounds(130, 270, 100, 20);
         Larrow.setBounds(300, 250, 150, 50); 
         
-        
-        
         LTo.setForeground(Color.black);
         LFrom.setForeground(Color.black);
         LPlace.setForeground(Color.black);
-        
-       /*JPanel pane=new JPanel();
-        pane.setLayout(new BorderLayout());
-        pane.add(LPlace);
-        pane.add(Larrow);
-        pane.add(CBPlace);
-        
-        pane.setBounds(0,220,650,80);
-        pane.setBackground(Color.decode("#1abc9c"));*/
-        //pane.setBackground(Color.decode("#7f8c8d"));
-       
-        
-        JLabel LDate=new JLabel("<html><B><font color= \"black\"size=\"4\">DEPARTS ON</font></B></html>");
-        
+        JLabel LDate=new JLabel("<html><B><font color= \"black\"size=\"4\">DEPARTS ON</font></B></html>");        
         JLabel Limgdate = new JLabel("\uf073");
         Limgdate.setFont(f.sm);
         Limgdate.setForeground(Color.black);
-         
         
         CBDated=new JComboBox(number);
         CBDatem=new JComboBox(month);
@@ -138,9 +112,6 @@ public class SearchPage extends JFrame{
         CBPlace.setForeground(Color.black);
         CBPlace.setBackground(Color.decode("#B0D4E6"));
         
-    
-        //Icon imgpassenger = new ImageIcon("Images\\passenger.png");
-        //JLabel Limgpassenger = new JLabel("", imgpassenger, SwingConstants.LEFT);
         JLabel Limgpassenger=new JLabel("\uf0c0");
         Limgpassenger.setFont(f.sm);
         Limgpassenger.setForeground(Color.black);
@@ -150,21 +121,18 @@ public class SearchPage extends JFrame{
         SlidePerson.setMinorTickSpacing(1);
         SlidePerson.setPaintTicks(true);
         SlidePerson.setPaintLabels(true);
-        SlidePerson.setBackground(Color.decode("#B0D4E6"));
-        
+        SlidePerson.setBackground(Color.decode("#B0D4E6"));        
         SlidePerson.setForeground(Color.black);
         
         LPerson.setBounds(410, 360, 200, 30);
         SlidePerson.setBounds(390, 395, 185, 50);
         Limgpassenger.setBounds(430, 320, 50, 50);  
         
-        licenseBox = new JCheckBox("Yes, I agree to the fact that all passengers are between 1 and 70 years of age.");
+        licenseBox = new JCheckBox("Yes, I agree that all passengers are between 1 and 70 years of age.");
         licenseBox.setMnemonic(KeyEvent.VK_C);
         licenseBox.setBounds(49, 470, 470, 30);  
         licenseBox.setBackground(Color.decode("#2c3e50"));
         licenseBox.setForeground(Color.white);
-          
-        
         
         fillpane.add(LFrom);
         fillpane.add(LTo);
@@ -178,11 +146,7 @@ public class SearchPage extends JFrame{
         fillpane.add(licenseBox);
         //fillpane.setBackground(Color.decode("#1abc9c"));
         fillpane.setBackground(Color.decode("#B0D4E6"));
-        
-        
-        
-        fillpane.setBounds(0,220,650,240);  
-        
+        fillpane.setBounds(0,220,650,240);        
         
         final JLabel Lpbar=new JLabel("<html>Getting flight details and availability.....</html>");
         pbar=new JProgressBar();
@@ -192,16 +156,11 @@ public class SearchPage extends JFrame{
         Lpbar.setBounds(212,555,800,30);
         Lpbar.setForeground(Color.white);
         Lpbar.setVisible(false);
-        
-        
         JLabel LDummy=new JLabel("<html><B> </B></html>");
         
         BSearch=new JButton("Find Flights");  
-        BSearch.setBounds(230,520,180,30);        
-              
-       
+        BSearch.setBounds(230,520,180,30);  
         
-        //Icon imgone=new ImageIcon("Images\\one.jpg");
         JLabel LOne=new JLabel("\uf002");
         LOne.setFont(f.med);
         LOne.setForeground(Color.white);
@@ -232,12 +191,9 @@ public class SearchPage extends JFrame{
         Lline2.setBounds(340,150,200,20);
         Lline3.setBounds(90,305,450,2);
         fillpane.add(Lline3);
-        
-       
         	
         frame.add(LOne);
         frame.add(Ltag);
-        //frame.add(Topane);
         frame.add(Lline3);
         frame.add(LTwo);
         frame.add(LThree);
@@ -262,25 +218,20 @@ public class SearchPage extends JFrame{
         frame.add(Limgpassenger);
         frame.add(Limgdate);
         frame.add(fillpane);    
-        //frame.add(pane);
         frame.add(licenseBox);        
         frame.add(BSearch);        
         frame.add(pbar);
         frame.add(Lpbar);        
         frame.add(LDummy);
-       
-        frame.getContentPane().setBackground(Color.decode("#2c3e50"));
-        
+        frame.getContentPane().setBackground(Color.decode("#2c3e50"));        
 
         //frame.getContentPane().setBackground(Color.decode("#2b87c3"));
         
         frame.setResizable(false);
-        
         frame.setVisible(true);
         BSearch.addActionListener(new SButton(this));
         
         objsearch=this;
-        
         
         timer = new Timer(interval, new ActionListener() {
         	String f1,f2;
@@ -298,22 +249,18 @@ public class SearchPage extends JFrame{
                     pbar.setBounds(0,0,0,0);
                     Lpbar.setVisible(false);
                     i=0;
-                    DisplayManager dm=new DisplayManager(objsearch);
-                    
-                    dm.displayDisplayPage(f1,f2);
-                    //new DisplayPage(objsearch);            
+                    DisplayManager dm = new DisplayManager(objsearch);                    
+                    dm.displayDisplayPage(f1, f2);           
                     frame.dispose();            
                 }               
             }
         });       
     }
-    public String getFile1()
-    {
+    
+    public String getFile1() {
     	return file1;
     }
-    public String getFile2()
-    {
+    public String getFile2() {
     	return file2;
-    }
-        
+    }        
 }

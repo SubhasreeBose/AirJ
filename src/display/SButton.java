@@ -14,27 +14,19 @@ public class SButton implements ActionListener {
     
     public void updateBar(int percent) {
         obj.pbar.setValue(percent);
-        obj.pbar.setStringPainted(true);
-        try {
-            //Thread.sleep(50);
-        }
-        catch(Exception error) {
-           
-        }
+        obj.pbar.setStringPainted(true);        
     }
-    
     
     @Override
     public void actionPerformed(ActionEvent e) {
     	String day,mon,yr;
-    	day=obj.CBDated.getSelectedItem().toString();
-        mon=obj.CBDatem.getSelectedItem().toString();
-        yr=obj.CBDatey.getSelectedItem().toString();
-    	ValidateDate vd=new ValidateDate(day.trim(),mon.trim(),yr.trim(),obj.file1,obj.file2);
-    	int check=vd.validateDate();
+    	day = obj.CBDated.getSelectedItem().toString();
+        mon = obj.CBDatem.getSelectedItem().toString();
+        yr = obj.CBDatey.getSelectedItem().toString();
+    	ValidateDate vd=new ValidateDate(day.trim(), mon.trim(), yr.trim(), obj.file1, obj.file2);
+    	int check = vd.validateDate();
     
-    	if(check==1)
-    	{
+    	if(check==1) {
     		if(obj.licenseBox.isSelected()) {
     			obj.BSearch.setEnabled(false);
     			obj.pbar.setValue(0);
@@ -47,9 +39,7 @@ public class SButton implements ActionListener {
     		}
     	}
     	else
-    	{
     		JOptionPane.showMessageDialog(null, " Enter a valid Date");
-    	}
     		
     }
 }

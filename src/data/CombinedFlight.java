@@ -8,12 +8,15 @@ import persistence.*;
  */
 
 public class CombinedFlight {
-    public int flightCount;
-    private String deptSilk,arrSilk,arrSpice,deptSpice,intermediate,totalTime,via,spiceFlightNo,silkFlightNo;
-    final int ADDED_TIME = 150;
-    String file1,file2,date;
     
-    public CombinedFlight(String source,int Day,String date, int passCount,String file1,String file2) {
+	public int flightCount;
+    private String deptSilk,arrSilk,arrSpice,deptSpice,intermediate,totalTime,via,spiceFlightNo,silkFlightNo;
+    private final int ADDED_TIME = 150;
+    private final int DEPARTURE = 0;
+    private final int ARRIVAL = 1;
+    String file1, file2, date;
+    
+    public CombinedFlight(String source, int Day, String date, int passCount, String file1, String file2) {
         int i,j;
         deptSilk="";
         arrSilk="";
@@ -37,15 +40,15 @@ public class CombinedFlight {
             if(spiceJet.flights[i].getSource().compareTo(source) == 0 && spiceJet.flights[i].getFrequency(Day)) { 
                 for(j=0;j<silkAir.size;j++) { 
                     String silkSource=silkAir.flights[j].getSource();
-                    int depTimeHr = silkAir.getHr(j,0);
-                    int depTimeMin = silkAir.getMin(j,0);
+                    int depTimeHr = silkAir.getHr(j,DEPARTURE);
+                    int depTimeMin = silkAir.getMin(j,DEPARTURE);
 
                     String spiceDest = spiceJet.flights[i].getDestination();
                     spiceDest = spiceDest.trim();
 
-                    int arrTimeHr = spiceJet.getHr(i,1);
-                    int arrTimeMin = spiceJet.getMin(i,1);
-                    if(spiceDest.compareTo(silkSource.substring(0,silkSource.lastIndexOf("(")-1).toUpperCase().trim())==0 ) { 
+                    int arrTimeHr = spiceJet.getHr(i,ARRIVAL);
+                    int arrTimeMin = spiceJet.getMin(i,ARRIVAL);
+                    if(spiceDest.compareTo(silkSource.substring(0, silkSource.lastIndexOf("(")-1).toUpperCase().trim())==0) { 
                         if(silkAir.flights[j].getFrequency(Day)) {
                         	int time = timediff(arrTimeHr, arrTimeMin, depTimeHr, depTimeMin, false); 
                             if(time >= 120 && time <= 360)
@@ -58,17 +61,17 @@ public class CombinedFlight {
                      * is available or not.
                      */
                     if(silkAir.flights[j].getFrequency((Day+1)%7))
-                    	if(silkAir.getHr(j,  0) < 6)
+                    	if(silkAir.getHr(j,  DEPARTURE) < 6)
                     		flightCount++;
                 }			   
             }
         }
     }
     
-     public void setSilkFlightNo(String flightNo){
+    public void setSilkFlightNo(String flightNo){
         silkFlightNo= flightNo;
     }
-     public void setSpiceFlightNo(String flightNo){
+    public void setSpiceFlightNo(String flightNo){
         spiceFlightNo= flightNo;
     }
     public void setIntermediate(String inter){
@@ -136,16 +139,16 @@ public class CombinedFlight {
             if(spiceJet.flights[i].getSource().compareTo(source) == 0 && spiceJet.flights[i].getFrequency(Day)) { 
                 for(j=0;j<silkAir.size;j++) {  
                     String silkSource=silkAir.flights[j].getSource(); 
-                    int depTimeHr = silkAir.getHr(j,0);
-                    int depTimeMin = silkAir.getMin(j,0);
+                    int depTimeHr = silkAir.getHr(j, DEPARTURE);
+                    int depTimeMin = silkAir.getMin(j, DEPARTURE);
 
                     String spiceDest = spiceJet.flights[i].getDestination();
                     spiceDest = spiceDest.trim();
 
-                    int arrTimeHr = spiceJet.getHr(i,1);
-                    int arrTimeMin = spiceJet.getMin(i,1);
+                    int arrTimeHr = spiceJet.getHr(i, ARRIVAL);
+                    int arrTimeMin = spiceJet.getMin(i, ARRIVAL);
                     
-                    if(spiceDest.compareTo(silkSource.substring(0,silkSource.lastIndexOf("(")-1).toUpperCase().trim())==0 ) { 
+                    if(spiceDest.compareTo(silkSource.substring(0, silkSource.lastIndexOf("(")-1).toUpperCase().trim())==0) { 
                         if(silkAir.flights[j].getFrequency(Day)) {
                         	int time = timediff(arrTimeHr, arrTimeMin, depTimeHr, depTimeMin, false); 
                             if(time >= 120 && time <= 360) {
@@ -163,7 +166,7 @@ public class CombinedFlight {
                                 cf[Count].setArrSilk(convert(silkAir.flights[j].getArrTime()));
                                
                                 
-                                totalTime = timediff(spiceJet.getHr(i, 0), spiceJet.getMin(i, 0), silkAir.getHr(j, 1), silkAir.getMin(j, 1), ((spiceJet.getHr(i, 0) < silkAir.getHr(j, 0)) ? true:false)) - ADDED_TIME;                                
+                                totalTime = timediff(spiceJet.getHr(i, DEPARTURE), spiceJet.getMin(i, DEPARTURE), silkAir.getHr(j, ARRIVAL), silkAir.getMin(j, ARRIVAL), (silkAir.flights[j].getArrTime().contains("+1") ? true:false)) - ADDED_TIME;
                                 duration[Count]=totalTime;
                                 cf[Count].setDuration(Integer.toString(totalTime/60)+"hrs "+Integer.toString(totalTime%60)+ "mins");
                                 Count++;                               
@@ -176,7 +179,7 @@ public class CombinedFlight {
                          * is available or not.
                          */
                         if(silkAir.flights[j].getFrequency((Day+1)%7)) {
-                        	if(silkAir.getHr(j,  0) < 6) {
+                        	if(silkAir.getHr(j,  DEPARTURE) < 6) {
                         		int time = timediff(arrTimeHr, arrTimeMin, depTimeHr, depTimeMin, true); 
                                 if(time >= 120 && time <= 360) {                            
                                     cf[Count].setDeptSpice(spiceJet.flights[i].getDepTime());
@@ -192,9 +195,9 @@ public class CombinedFlight {
                                     cf[Count].setSilkFlightNo(silkAir.flights[j].getFlightNo());
                                     cf[Count].setArrSilk(convert(silkAir.flights[j].getArrTime()));
                                     
-                                    totalTime = timediff(spiceJet.getHr(i, 0), spiceJet.getMin(i, 0), silkAir.getHr(j, 1), silkAir.getMin(j, 1), true);
-                                    duration[Count]=totalTime;
-                                    cf[Count].setDuration(Integer.toString(totalTime/60)+"hrs "+Integer.toString(totalTime%60)+ "mins");
+                                    totalTime = timediff(spiceJet.getHr(i, DEPARTURE), spiceJet.getMin(i, DEPARTURE), silkAir.getHr(j, ARRIVAL), silkAir.getMin(j, ARRIVAL), true) - ADDED_TIME;
+                                    duration[Count] = totalTime;
+                                    cf[Count].setDuration(Integer.toString(totalTime/60)+"hrs " + Integer.toString(totalTime%60) + "mins");
                                     Count++;                             
                                 }
                         	}

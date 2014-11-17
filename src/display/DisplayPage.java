@@ -29,27 +29,23 @@ public class DisplayPage extends JFrame {
     int selRow;
     public int month,day,passCount;
     private CombinedFlight  ff;
-    CombinedFlight filteredFlight[];
-    
+    CombinedFlight filteredFlight[];    
     
     public DisplayPage(SearchPage objsearch,String file1,String file2) {
 
-        String source=objsearch.CBPlace.getSelectedItem().toString();
-        ValidateDate vd=new ValidateDate(objsearch.CBDated.getSelectedItem().toString(),objsearch.CBDatem.getSelectedItem().toString(),objsearch.CBDatey.getSelectedItem().toString(),file1,file2);
+        String source = objsearch.CBPlace.getSelectedItem().toString();
+        ValidateDate vd = new ValidateDate(objsearch.CBDated.getSelectedItem().toString(), objsearch.CBDatem.getSelectedItem().toString(), objsearch.CBDatey.getSelectedItem().toString(), file1, file2);
     	
         month = vd.checkMonth();
         day=vd.checkDay(Integer.parseInt(objsearch.CBDated.getSelectedItem().toString()), month);
         
-        String date=objsearch.CBDated.getSelectedItem().toString() +"/" + month ; // edited
-        //**************************************************
+        String date=objsearch.CBDated.getSelectedItem().toString() +"/" + month ;
         passCount = objsearch.SlidePerson.getValue(); 
-        //**************************************************
         
-        CombinedFlight cf = new  CombinedFlight(source, day, date, passCount,file1,file2);
+        CombinedFlight cf = new CombinedFlight(source, day, date, passCount, file1, file2);
         filteredFlight=new CombinedFlight[cf.flightCount];
         filteredFlight=cf.combine(source, day, passCount);
-        //FileRead fr=new FileRead();
-        //filteredFlight=fr.readBooking(filteredFlight,cf.flightCount,date,passCount);
+        
         row=new String[cf.flightCount][9];
         
         int i;

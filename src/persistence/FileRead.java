@@ -20,16 +20,11 @@ public class FileRead implements Persistence {
     Flight flights[];
     int size;
     
-    public FileRead()
-    {
-    	
+    public FileRead() {
+    	flights = null;
+    	size = 0;
     }
-    /*public FileRead(String file1,String file2)
-    {
-    	this.file1=file1;
-    	this.file2=file2;
-    	
-    }*/
+    
     @Override
     public Flight[] readSilkAirFile(String file) {
         FileReader reader = null;
