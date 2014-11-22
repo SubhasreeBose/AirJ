@@ -10,7 +10,7 @@
  */
 public interface Display {
     public void displaySearchPage();
-    public void displayDisplayPage(SearchPage objSearch);
-    public void displayBookingPage(DisplayPage objdisplay,SearchPage objsearch);
+    public void displayDisplayPage(CombinedFlight cf);//erom chhilo na
+    public void displayBookingPage(CombinedFlight cf);
     public void displayTicket();
 }

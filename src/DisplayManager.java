@@ -10,20 +10,35 @@
  */
 public class DisplayManager implements Display{
 
-   
+   SearchPage sm,objsearch;
+   DisplayPage objdisplay;
+   DisplayManager()
+   {
+       
+   }
+   DisplayManager(Object obj)
+   {
+       objsearch=(SearchPage)obj;
+   }
+   DisplayManager(Object obj1,Object obj2)
+   {
+       objsearch=(SearchPage)obj2;
+       objdisplay=(DisplayPage)obj1;
+   }
     @Override
     public void displaySearchPage() {
-     new SearchPage(); 
+     sm=new SearchPage(); 
      
     }
 
     @Override
-    public void displayDisplayPage(SearchPage objSearch) {
-        new DisplayPage(objSearch);
+    public void displayDisplayPage(CombinedFlight cf) {
+        
+        new DisplayPage(objsearch);
     }
 
     @Override
-    public void displayBookingPage(DisplayPage objdisplay,SearchPage objsearch) {
+    public void displayBookingPage(CombinedFlight cf) {
         new BookingPage(objdisplay,objsearch);
     }
 

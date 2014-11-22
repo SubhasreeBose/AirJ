@@ -251,13 +251,14 @@ public class SearchPage extends JFrame{
                     pbar.setBounds(0,0,0,0);
                     Lpbar.setVisible(false);
                     i=0;
-                    DisplayManager dm=new DisplayManager();
-                    
-                    dm.displayDisplayPage(objsearch);
+                    DisplayManager dm=new DisplayManager(objsearch);
+                    CombinedFlight cf=null;
+                    dm.displayDisplayPage(cf);
                     //new DisplayPage(objsearch);            
                     frame.dispose();            
                 }               
             }
         });       
-    }        
+    }
+        
 }
