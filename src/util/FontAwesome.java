@@ -15,8 +15,8 @@ import javax.swing.JLabel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 public class FontAwesome {
-	Font lg;
-	Font sm;
+	public Font lg;
+	public Font sm;
 	
 	public FontAwesome(){
 		

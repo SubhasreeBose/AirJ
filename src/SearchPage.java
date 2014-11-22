@@ -8,8 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import javax.swing.*;
-import javax.swing.Timer;
 import javax.swing.plaf.ColorUIResource;
+
+import util.FontAwesome;
 
 class SButton implements ActionListener {
     SearchPage obj;
@@ -34,7 +35,7 @@ class SButton implements ActionListener {
         if(obj.licenseBox.isSelected()) {
             obj.BSearch.setEnabled(false);
             obj.pbar.setValue(0);
-            obj.pbar.setBounds(30,570,570,20);
+            obj.pbar.setBounds(30,590,570,20);
             obj.pbar.setStringPainted(true);
             obj.timer.start();
         }
@@ -71,7 +72,7 @@ public class SearchPage extends JFrame{
         
         //ImageIcon img = new ImageIcon("Images/images.jpg");
         //frame.setIconImage(img.getImage());
-        String []month = {"October"};
+        String []month = {"Oct"};
         String []year = {"2014"};
         
         frame=new JFrame("Search");
@@ -86,65 +87,119 @@ public class SearchPage extends JFrame{
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
        
       
-        Icon img1 = new ImageIcon("Images\\index.png");
-        JLabel LLogo = new JLabel("<html><i><font face=\"verdana\" size=\"3\" color=\"blue\">The smarter, easier and faster way to fly.</font></i></html>", img1, SwingConstants.LEFT);
-        LLogo.setBounds(0, 0, 700, 50);
+        Icon img1 = new ImageIcon("Images\\logo-without-bg.png");
+        JLabel LLogo = new JLabel("<html><i><font face=\"verdana\" size=\"3\" color=\"white\">The smarter, easier and faster way to fly.</font></i></html>", img1, SwingConstants.LEFT);
+        LLogo.setBounds(0, 0, 700, 70);
         LLogo.setVisible(true);
         
-        JLabel LHeading=new JLabel("<html><font face=\"Castellar\" size=\"4\" color=\"#B20000\">Fly anywhere with us. Book flights in 3 simple steps.</font></html>");        
+        JLabel LHeading=new JLabel("<html><font face=\"Castellar\" size=\"4\" color=\"white\">Fly anywhere with us. Book flights in 3 simple steps.</font></html>");        
         LHeading.setBounds(50, 80, 600, 50);
          
         JPanel fillpane=new JPanel();
-    
+        
+       
+        FontAwesome f=new FontAwesome();
+        //JLabel LTo=new JLabel("\uf0c0");
+        //LTo.setFont(LTo.getFont().deriveFont(12));
         JLabel LTo=new JLabel("<html><B><font size=\"4\" >To</font></B></html>");
+        //FontAwesome f=new FontAwesome();
+        //LTo.setFont(f.sm);
+        
+        
         JLabel LFrom=new JLabel("<html><B><font size=\"4\">From</font></B></html>");
-        Icon imgarrow = new ImageIcon("Images\\arrow.png");   
-        JLabel Larrow=new JLabel("",imgarrow,SwingConstants.LEFT);
+        //Icon imgarrow = new ImageIcon("Images\\arrow.png"); 
+        
+        JLabel Larrow=new JLabel("\uf072");
+        Larrow.setFont(f.lg);
+        Larrow.setForeground(Color.white);
+        //JLabel Larrow=new JLabel("",imgarrow,SwingConstants.LEFT);
         JLabel LPlace=new JLabel("<html>SINGAPORE</html>");
         CBPlace=new JComboBox(places);
         
-        LTo.setBounds(410, 220, 40, 30);
+        //JPanel Topane=new JPanel();
+        /*Topane.setLayout(new BorderLayout());
+        Topane.setBounds(400, 220, 170, 80);*/
+        LTo.setBounds(430, 220, 40, 30);
         LFrom.setBounds(150, 220, 50, 30);
         LPlace.setBounds(410, 260, 170, 20);
-        CBPlace.setBounds(150, 260, 100, 20);
-        Larrow.setBounds(280, 212, 150, 50); 
+        CBPlace.setBounds(130, 260, 100, 20);
+        Larrow.setBounds(300, 240, 150, 50); 
+        
+        /*Topane.add(LTo);
+        Topane.add(LPlace);
+        
+        Topane.setBackground(Color.decode("#1abc9c"));*/
+        
+        LTo.setForeground(Color.white);
+        LFrom.setForeground(Color.white);
+        LPlace.setForeground(Color.white);
+        //CBPlace.setForeground(Color.white);
+        
+        
+        
+        
+        JPanel pane=new JPanel();
+        pane.setLayout(new BorderLayout());
+        //pane.add(Topane,BorderLayout.EAST);
+       // pane.add(LTo,BorderLayout.EAST);
+        //pane.add(LFrom);
+        pane.add(LPlace);
+        pane.add(Larrow);
+        pane.add(CBPlace);
+        
+        pane.setBounds(0,220,650,80);
+        pane.setBackground(Color.decode("#1abc9c"));
+        //pane.setBackground(Color.decode("#7f8c8d"));
        
         
-        JLabel LDate=new JLabel("<html><B><font size=\"4\">Departs on</font></B></html>");
-        Icon imgdate = new ImageIcon("Images\\date.png");
-        JLabel Limgdate = new JLabel("", imgdate, SwingConstants.LEFT);
-        
+        JLabel LDate=new JLabel("<html><B><font color= \"white\"size=\"4\">Departs on</font></B></html>");
+        //Icon imgdate = new ImageIcon("Images\\date.png");
+        //JLabel Limgdate = new JLabel("", imgdate, SwingConstants.LEFT);
+        JLabel Limgdate = new JLabel("\uf073");
+        Limgdate.setFont(f.sm);
+        Limgdate.setForeground(Color.white);
          
         
         CBDated=new JComboBox(number);
         JComboBox CBDatem=new JComboBox(month);
         JComboBox CBDatey=new JComboBox(year);
         
-        LDate.setBounds(125, 315, 100, 20);
-        Limgdate.setBounds(88,310,30,30);
-        CBDated.setBounds(53,360,40,20);
-        CBDatem.setBounds(103,360,80,20);
-        CBDatey.setBounds(193,360,60,20);  
+        LDate.setBounds(130, 350, 100, 20);
+        Limgdate.setBounds(150,310,30,30);
+        CBDated.setBounds(115,385,40,20);
+        CBDatem.setBounds(165,385,50,20);
+        CBDatey.setBounds(215,385,60,20); 
+        CBDated.setBackground(Color.decode("#1abc9c"));
+        CBDatem.setBackground(Color.decode("#1abc9c"));
+        CBDatey.setBackground(Color.decode("#1abc9c"));
+        CBDated.setForeground(Color.white);
+        CBDatem.setForeground(Color.white);
+        CBDatey.setForeground(Color.white);
         
     
-        Icon imgpassenger = new ImageIcon("Images\\passenger.png");
-        JLabel Limgpassenger = new JLabel("", imgpassenger, SwingConstants.LEFT);
-        JLabel LPerson=new JLabel("<html><B><font size=\"4\">No.of passengers</font></B></html>");
+        //Icon imgpassenger = new ImageIcon("Images\\passenger.png");
+        //JLabel Limgpassenger = new JLabel("", imgpassenger, SwingConstants.LEFT);
+        JLabel Limgpassenger=new JLabel("\uf0c0");
+        Limgpassenger.setFont(f.sm);
+        Limgpassenger.setForeground(Color.white);
+        JLabel LPerson=new JLabel("<html><B><font color=\"white\" size=\"4\">Passenger Count</font></B></html>");
         SlidePerson=new JSlider(JSlider.HORIZONTAL,min,max,initial);
         SlidePerson.setMajorTickSpacing(1);
         SlidePerson.setMinorTickSpacing(1);
         SlidePerson.setPaintTicks(true);
         SlidePerson.setPaintLabels(true);
-        SlidePerson.setBackground(Color.white);
+        SlidePerson.setBackground(Color.decode("#1abc9c"));
+        SlidePerson.setForeground(Color.white);
         
-        LPerson.setBounds(450, 310, 130, 30);//berie jachhe to lekata baire
-        SlidePerson.setBounds(395, 350, 185, 50);
-        Limgpassenger.setBounds(400, 295, 50, 50);  
+        LPerson.setBounds(410, 340, 130, 30);//berie jachhe to lekata baire
+        SlidePerson.setBounds(390, 380, 185, 50);
+        Limgpassenger.setBounds(430, 295, 50, 50);  
         
         licenseBox = new JCheckBox("Yes, I agree to the fact that all passengers are between 1 and 70 years of age.");
         licenseBox.setMnemonic(KeyEvent.VK_C);
-        licenseBox.setBounds(49, 420, 470, 30);  
-        licenseBox.setBackground(Color.white);
+        licenseBox.setBounds(49, 470, 470, 30);  
+        licenseBox.setBackground(Color.decode("#2c3e50"));
+        licenseBox.setForeground(Color.white);
           
         fillpane.add(LFrom);
         fillpane.add(LTo);
@@ -156,9 +211,9 @@ public class SearchPage extends JFrame{
         fillpane.add(LPerson);
         fillpane.add(SlidePerson);
         fillpane.add(licenseBox);
-        fillpane.setBackground(Color.white);
+        fillpane.setBackground(Color.decode("#1abc9c"));
         
-        fillpane.setBounds(20,220,570,180);  
+        fillpane.setBounds(0,220,650,240);  
         
         
         final JLabel Lpbar=new JLabel("<html>Getting flight details and availability.....</html>");
@@ -166,29 +221,37 @@ public class SearchPage extends JFrame{
         pbar.setMinimum(MY_MINIMUM);
         pbar.setMaximum(MY_MAXIMUM);        
         pbar.setForeground(Color.decode("#66A3FF"));
-        Lpbar.setBounds(212,520,800,30);
+        Lpbar.setBounds(212,555,800,30);
+        Lpbar.setForeground(Color.white);
         Lpbar.setVisible(false);
         
         
         JLabel LDummy=new JLabel("<html><B> </B></html>");
         
         BSearch=new JButton("Find Flights");  
-        BSearch.setBounds(230,480,180,30);        
+        BSearch.setBounds(230,520,180,30);        
               
        
         
-        Icon imgone=new ImageIcon("Images\\one.jpg");
-        JLabel LOne=new JLabel("", imgone, SwingConstants.LEFT);
-        Icon imgline=new ImageIcon("Images\\line_blue.png");
+        //Icon imgone=new ImageIcon("Images\\one.jpg");
+        JLabel LOne=new JLabel("\uf002");
+        LOne.setFont(f.sm);
+        LOne.setForeground(Color.white);
+        Icon imgline=new ImageIcon("Images\\line.png");
         JLabel Lline1=new JLabel("", imgline, SwingConstants.LEFT);
         JLabel Lline2=new JLabel("", imgline, SwingConstants.LEFT);
+        JLabel Lline3=new JLabel("", imgline, SwingConstants.LEFT);
         Icon imgThree=new ImageIcon("Images\\3_nc.png");
-        JLabel LThree=new JLabel("", imgThree, SwingConstants.LEFT);
+        JLabel LThree=new JLabel("\uf00c");
+        LThree.setFont(f.sm);
+        LThree.setForeground(Color.white);
         Icon imgTwo=new ImageIcon("Images\\2_nc.png");
-        JLabel LTwo=new JLabel("", imgTwo, SwingConstants.LEFT);
-        JLabel search=new JLabel("<html><B><font size=\"2\">Search Flight</font></B></html>");
-        JLabel display=new JLabel("<html><B><font size=\"2\">Select Flight</font></B></html>");
-        JLabel book=new JLabel("<html><B><font size=\"2\">Book Flight</font></B></html>");
+        JLabel LTwo=new JLabel("\uf0ca");
+        LTwo.setFont(f.sm);
+        LTwo.setForeground(Color.white);
+        JLabel search=new JLabel("<html><B><font color=\"white\"size=\"2\">Search Flight</font></B></html>");
+        JLabel display=new JLabel("<html><B><font color=\"white\" size=\"2\">Select Flight</font></B></html>");
+        JLabel book=new JLabel("<html><B><font color=\"white\" size=\"2\">Book Flight</font></B></html>");
         
         LOne.setBounds(40, 105, 70, 100);
         LTwo.setBounds(300, 130, 50, 50);
@@ -198,9 +261,13 @@ public class SearchPage extends JFrame{
         book.setBounds(530, 180, 150, 30);
         Lline1.setBounds(90,150,200,20);
         Lline2.setBounds(340,150,200,20);
+        Lline3.setBounds(70,290,570,20);
+        fillpane.add(Lline3);
         
         
         frame.add(LOne);
+        //frame.add(Topane);
+        frame.add(Lline3);
         frame.add(LTwo);
         frame.add(LThree);
         frame.add(Lline1);
@@ -223,14 +290,18 @@ public class SearchPage extends JFrame{
         frame.add(SlidePerson);
         frame.add(Limgpassenger);
         frame.add(Limgdate);
-        frame.add(fillpane);        
+        frame.add(fillpane);    
+        frame.add(pane);
         frame.add(licenseBox);        
         frame.add(BSearch);        
         frame.add(pbar);
         frame.add(Lpbar);        
         frame.add(LDummy);
        
-        frame.getContentPane().setBackground(Color.white);
+        frame.getContentPane().setBackground(Color.decode("#2c3e50"));
+
+        //frame.getContentPane().setBackground(Color.decode("#2b87c3"));
+        
         frame.setResizable(false);
         
         frame.setVisible(true);
